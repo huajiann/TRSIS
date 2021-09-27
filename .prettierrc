@@ -1,0 +1,8 @@
+{
+    "printWidth": 120,
+    "tabWidth": 2,
+    "useTbas": false,
+    "semi": true,
+    "sngleQuote": true,
+    "trailingComma": "all"
+}
