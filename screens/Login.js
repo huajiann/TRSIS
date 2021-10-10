@@ -60,7 +60,8 @@ const Login = ({ navigation }) => {
         if (status !== "SUCCESS") {
           handleMessage(message, status);
         } else {
-          navigation.navigate("Welcome", { ...data[0] });
+          ``;
+          navigation.navigate("Tabs", { ...data[0] });
         }
         setSubmitting(false);
       })
@@ -79,7 +80,7 @@ const Login = ({ navigation }) => {
   return (
     <KeyboardAvoidingWrapper>
       <StyledContainer>
-        <StatusBar style="dark" />
+        <StatusBar style="light" />
         <InnerContainer>
           <PageLogo resizeMode="cover" source={require("./../assets/img/img1.jpg")} />
           <PageTitle>TRSIS</PageTitle>
@@ -135,7 +136,7 @@ const Login = ({ navigation }) => {
                   </StyledButton>
                 )}
                 <Line />
-                <StyledButton google={true} onPress={handleSubmit}>
+                <StyledButton google={true} onPress={handleSubmit} disabled={true}>
                   <Fontisto name="google" color={primary} size={25} />
                   <ButtonText google={true}>Sign in with Google</ButtonText>
                 </StyledButton>
