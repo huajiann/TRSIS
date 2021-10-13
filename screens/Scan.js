@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Scan = ({ navigation, route }) => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -44,6 +45,16 @@ const Scan = ({ navigation, route }) => {
     );
   }
 
+  const storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem("BinID", value);
+      navigation.goBack();
+    } catch (e) {
+      // saving error
+      console.log(e);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.barcodebox}>
@@ -55,16 +66,7 @@ const Scan = ({ navigation, route }) => {
       <Text style={styles.maintext}>{text}</Text>
       {scanned && <Button title={"Scan again?"} onPress={() => setScanned(false)} color="blue" />}
 
-      <Button
-        style={{ margin: 10 }}
-        title={"Connect"}
-        onPress={() =>
-          navigation.navigate("Home", {
-            paramKey: text,
-          })
-        }
-        color="blue"
-      />
+      <Button style={{ margin: 10 }} title={"Connect"} onPress={() => storeData(text)} color="blue" />
     </View>
   );
 };

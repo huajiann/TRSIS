@@ -1,13 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Image, Text } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/Ionicons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { PageTitle, SubTitle, InnerContainer } from "./../components/style";
 
 const Home = ({ navigation, route }) => {
+  const [binID, setbinID] = useState();
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("BinID");
+      if (value !== null) {
+        // value previously stored
+        setbinID(value);
+        console.log(value);
+      } else {
+        setbinID("No Bin Detected!");
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  const removeValue = async () => {
+    try {
+      await AsyncStorage.removeItem("BinID");
+    } catch (e) {
+      // remove error
+      console.log(e);
+    }
+
+    console.log("Done.");
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const { name, email } = route.params;
   console.log(route.params);
   return (
@@ -204,28 +237,40 @@ const Home = ({ navigation, route }) => {
                 Smart Bin
               </Text>
             </View>
-            <View style={{ width: "50%", alignItems: "flex-end" }}>
-              <View
-                style={{
-                  backgroundColor: "#00a46c",
-                  paddingHorizontal: 20,
-                  paddingVertical: 5,
-                  borderRadius: 15,
-                }}
-              >
-                <Text
+            <TouchableOpacity
+              onPress={() => removeValue()}
+              style={{
+                height: 30,
+                justifyContent: "space-evenly",
+                width: "100%",
+                alignContent: "center",
+                paddingLeft: 90,
+              }}
+            >
+              <View>
+                <View
                   style={{
-                    fontWeight: "bold",
-                    fontSize: 12,
-                    color: "#fff",
+                    backgroundColor: "red",
+                    paddingHorizontal: 20,
+                    paddingVertical: 5,
+                    borderRadius: 15,
                   }}
                 >
-                  More
-                </Text>
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: 12,
+                      color: "#fff",
+                    }}
+                  >
+                    Unlink
+                  </Text>
+                </View>
               </View>
-            </View>
+            </TouchableOpacity>
           </View>
           <TouchableOpacity
+            onPress={() => getData()}
             style={{
               height: 220,
               elevation: 3,
@@ -252,7 +297,7 @@ const Home = ({ navigation, route }) => {
                   fontWeight: "normal",
                 }}
               >
-                {route.params.paramKey || "No Bin Detected"}
+                {binID || "No Bin Detected"}
               </Text>
             </View>
           </TouchableOpacity>
