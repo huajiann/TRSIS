@@ -3,6 +3,7 @@ import { View, Image, Text } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
+import Icon from "react-native-vector-icons/Ionicons";
 
 import { PageTitle, SubTitle, InnerContainer } from "./../components/style";
 
@@ -89,7 +90,7 @@ const Home = ({ navigation, route }) => {
                   justifyContent: "center",
                 }}
               >
-                <Image source={require("./../assets/icons/scan-regular-240.png")} style={{ height: 50, width: 50 }} />
+                <Icon name="qr-code-outline" color="#000" size={50} />
                 <View
                   style={{
                     flexDirection: "row",
@@ -122,7 +123,7 @@ const Home = ({ navigation, route }) => {
                   justifyContent: "center",
                 }}
               >
-                <Image source={require("./../assets/icons/gift-open-outline.png")} style={{ height: 50, width: 50 }} />
+                <Icon name="gift-outline" color="#000" size={50} />
                 <View
                   style={{
                     flexDirection: "row",
@@ -155,7 +156,7 @@ const Home = ({ navigation, route }) => {
                   justifyContent: "center",
                 }}
               >
-                <Image source={require("./../assets/icons/betteruser.png")} style={{ height: 50, width: 50 }} />
+                <Icon name="person-circle-outline" color="#000" size={50} />
                 <View
                   style={{
                     flexDirection: "row",
