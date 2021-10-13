@@ -4,12 +4,10 @@ import { Avatar, Title, Caption, Text, TouchableRipple } from "react-native-pape
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 const Profile = ({ navigation, route }) => {
-  const { name, email } = route.params;
-  console.log("Profile : " + name);
   return (
     <SafeAreaView style={styles.AndroidSafeArea}>
       <View style={styles.userInfoSection}>
-        <View style={{ flexDirection: "row", marginTop: 15 }}>
+        <View style={{ flexDirection: "row", marginTop: 100 }}>
           <Avatar.Image source={require("./../assets/icons/betteruser.png")} size={80} backgroundColor={"#7FFFD4"} />
           <View style={{ marginLeft: 20 }}>
             <Title
@@ -21,7 +19,7 @@ const Profile = ({ navigation, route }) => {
                 },
               ]}
             >
-              {name || "Your Name"}
+              {route.params.profName || "Your Name"}
             </Title>
             <Caption style={styles.caption}>Recycling is fun!</Caption>
           </View>
@@ -34,7 +32,7 @@ const Profile = ({ navigation, route }) => {
         </View>
         <View style={styles.row}>
           <Icon name="email" color="#616161" size={20} />
-          <Text style={{ color: "#616161", marginLeft: 10 }}>{email || "my.email@gmail.com"}</Text>
+          <Text style={{ color: "#616161", marginLeft: 10 }}>{route.params.profEmail || "my.email@gmail.com"}</Text>
         </View>
       </View>
 

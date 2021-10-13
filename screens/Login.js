@@ -61,7 +61,7 @@ const Login = ({ navigation }) => {
           handleMessage(message, status);
         } else {
           ``;
-          navigation.navigate("Tabs", { ...data[0] });
+          navigation.navigate("Home", { ...data[0] });
         }
         setSubmitting(false);
       })

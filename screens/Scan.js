@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
-const Scan = ({ navigation }) => {
+const Scan = ({ navigation, route }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("Not yet scanned!");
@@ -53,8 +53,18 @@ const Scan = ({ navigation }) => {
         />
       </View>
       <Text style={styles.maintext}>{text}</Text>
-
       {scanned && <Button title={"Scan again?"} onPress={() => setScanned(false)} color="blue" />}
+
+      <Button
+        style={{ margin: 10 }}
+        title={"Connect"}
+        onPress={() =>
+          navigation.navigate("Home", {
+            paramKey: text,
+          })
+        }
+        color="blue"
+      />
     </View>
   );
 };

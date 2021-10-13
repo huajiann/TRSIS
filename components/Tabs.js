@@ -41,7 +41,8 @@ const CustomTabBarButton = ({ children, onPress }) => (
 const Tabs = ({ route }) => {
   const name = route.params.name;
   const email = route.params.email;
-  console.log(name);
+  const bin = route.params.paramKey;
+  console.log(bin);
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -62,7 +63,7 @@ const Tabs = ({ route }) => {
       <Tab.Screen
         name="Home"
         component={HomeStackScreen}
-        initialParams={{ userName: name }}
+        initialParams={{ userName: name, bin: bin }}
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: "center", justifyContent: "center", top: 5 }}>
@@ -136,7 +137,11 @@ const HomeStackScreen = ({ navigation, route }) => (
       headerLeft: false,
     }}
   >
-    <HomeStack.Screen name="Home" component={Home} initialParams={{ userName: route.params.userName }} />
+    <HomeStack.Screen
+      name="Home"
+      component={Home}
+      initialParams={{ userName: route.params.userName, bin: route.params.paramKey }}
+    />
   </HomeStack.Navigator>
 );
 
@@ -157,7 +162,6 @@ const ProfileStackScreen = ({ navigation, route }) => (
       name="Profile"
       component={Profile}
       initialParams={{ name: route.params.userName, email: route.params.userEmail }}
-      {...console.log(route.params.details)}
     />
     <ProfileStack.Screen
       name="EditProfile"
