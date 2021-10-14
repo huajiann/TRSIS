@@ -37,7 +37,9 @@ const Rewards = ({ navigation }) => {
           elevation: 30,
           flex: 1,
         }}
-      ></View>
+      >
+        {/* You may start coding here. :D*/}
+      </View>
     </SafeAreaView>
   );
 };
