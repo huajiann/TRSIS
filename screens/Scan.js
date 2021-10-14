@@ -22,7 +22,7 @@ const Scan = ({ navigation, route }) => {
   // What happened when we scan the qrcode
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    setText(data);
+    setText("Bin ID : " + data);
     console.log("Type : " + type + "\nData : " + data);
   };
 
@@ -48,6 +48,8 @@ const Scan = ({ navigation, route }) => {
   const storeData = async (value) => {
     try {
       await AsyncStorage.setItem("BinID", value);
+      setScanned(false);
+      setText("Not yet scanned!");
       navigation.push("Home");
     } catch (e) {
       // saving error
@@ -64,9 +66,12 @@ const Scan = ({ navigation, route }) => {
         />
       </View>
       <Text style={styles.maintext}>{text}</Text>
-      {scanned && <Button title={"Scan again?"} onPress={() => setScanned(false)} color="blue" />}
-
-      <Button style={{ margin: 10 }} title={"Connect"} onPress={() => storeData(text)} color="blue" />
+      <View style={styles.buttonContainer}>
+        {scanned && <Button title={"Scan again?"} onPress={() => setScanned(false)} color="#167e64" />}
+        <View style={styles.button}>
+          {scanned && <Button title={"Connect"} onPress={() => storeData(text)} color="#167e64" />}
+        </View>
+      </View>
     </View>
   );
 };
@@ -93,6 +98,15 @@ const styles = StyleSheet.create({
   },
   maintext: {
     fontSize: 16,
+    margin: 20,
+  },
+  buttonContainer: {
+    width: "40%",
+    alignSelf: "center",
+  },
+  button: {
+    width: "100%",
+    alignSelf: "center",
     margin: 20,
   },
 });

@@ -23,7 +23,7 @@ const Home = ({ navigation, route }) => {
         const value2 = await AsyncStorage.getItem("BinID");
         if (value2 !== null) {
           // value previously stored
-          setbinID("Bin ID : " + value2);
+          setbinID(value2);
           setStatus("Status : Normal");
           console.log("checked");
         } else {
@@ -40,7 +40,7 @@ const Home = ({ navigation, route }) => {
       const value = await AsyncStorage.getItem("BinID");
       if (value !== null) {
         // value previously stored
-        setbinID("Bin ID : " + value);
+        setbinID(value);
         setStatus("Status : Normal");
       } else {
         setbinID("No Bin Detected!");
