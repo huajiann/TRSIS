@@ -10,25 +10,52 @@ import { PageTitle, SubTitle, InnerContainer } from "./../components/style";
 
 const Home = ({ navigation, route }) => {
   const [binID, setbinID] = useState();
+  const [status, setStatus] = useState();
 
-  const getData = async () => {
+  const [username, setUsername] = useState();
+
+  const getUserData = async () => {
     try {
-      const value = await AsyncStorage.getItem("BinID");
+      const value = await AsyncStorage.getItem("name");
       if (value !== null) {
         // value previously stored
-        setbinID(value);
-        console.log(value);
-      } else {
-        setbinID("No Bin Detected!");
+        setUsername(value);
+        const value2 = await AsyncStorage.getItem("BinID");
+        if (value2 !== null) {
+          // value previously stored
+          setbinID("Bin ID : " + value2);
+          setStatus("Status : Normal");
+          console.log("checked");
+        } else {
+          setbinID("No Bin Detected!");
+        }
       }
     } catch (e) {
       // error reading value
     }
   };
 
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("BinID");
+      if (value !== null) {
+        // value previously stored
+        setbinID("Bin ID : " + value);
+        setStatus("Status : Normal");
+      } else {
+        setbinID("No Bin Detected!");
+      }
+    } catch (e) {
+      // error reading value
+      console.log(e);
+    }
+  };
+
   const removeValue = async () => {
     try {
       await AsyncStorage.removeItem("BinID");
+      setbinID("No Bin Detected!");
+      setStatus("Click to Refresh");
     } catch (e) {
       // remove error
       console.log(e);
@@ -38,11 +65,10 @@ const Home = ({ navigation, route }) => {
   };
 
   useEffect(() => {
-    getData();
+    getUserData();
   }, []);
 
-  const { name, email } = route.params;
-  console.log(route.params);
+  //const { name, email } = route.params;
   return (
     <>
       <StatusBar style="dark" />
@@ -72,7 +98,7 @@ const Home = ({ navigation, route }) => {
               }}
             >
               <View style={{ width: "100%" }}>
-                <PageTitle welcome={true}>Hi! {name || "My name :,)"}</PageTitle>
+                <PageTitle welcome={true}>Hi! {username || "My name :,)"}</PageTitle>
                 <SubTitle>What are you going to do today?</SubTitle>
               </View>
             </View>
@@ -175,7 +201,7 @@ const Home = ({ navigation, route }) => {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => navigation.navigate("Profile", { profName: name, profEmail: email })}
+                onPress={() => navigation.navigate("Profile")}
                 style={{
                   height: 110,
                   elevation: 3,
@@ -286,7 +312,7 @@ const Home = ({ navigation, route }) => {
           >
             <View
               style={{
-                flexDirection: "row",
+                alignItems: "center",
                 paddingTop: 7,
                 paddingHorizontal: 10,
               }}
@@ -298,6 +324,14 @@ const Home = ({ navigation, route }) => {
                 }}
               >
                 {binID || "No Bin Detected"}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 15,
+                  fontWeight: "normal",
+                }}
+              >
+                {status}
               </Text>
             </View>
           </TouchableOpacity>

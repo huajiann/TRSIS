@@ -48,7 +48,7 @@ const Scan = ({ navigation, route }) => {
   const storeData = async (value) => {
     try {
       await AsyncStorage.setItem("BinID", value);
-      navigation.goBack();
+      navigation.push("Home");
     } catch (e) {
       // saving error
       console.log(e);

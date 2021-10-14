@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, SafeAreaView, Button, StyleSheet, Platform, StatusBar } from "react-native";
 import { Avatar, Title, Caption, Text, TouchableRipple } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
 const Profile = ({ navigation, route }) => {
+  const [username, setUsername] = useState();
+  const [useremail, setUseremail] = useState();
+
+  const getUserData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("name");
+      const value1 = await AsyncStorage.getItem("email");
+      if (value !== null && value1 !== null) {
+        // value previously stored
+        setUsername(value);
+        setUseremail(value1);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   return (
     <SafeAreaView style={styles.AndroidSafeArea}>
       <View style={styles.userInfoSection}>
@@ -19,7 +42,7 @@ const Profile = ({ navigation, route }) => {
                 },
               ]}
             >
-              {route.params.profName || "Your Name"}
+              {username || "Your Name"}
             </Title>
             <Caption style={styles.caption}>Recycling is fun!</Caption>
           </View>
@@ -32,7 +55,7 @@ const Profile = ({ navigation, route }) => {
         </View>
         <View style={styles.row}>
           <Icon name="email" color="#616161" size={20} />
-          <Text style={{ color: "#616161", marginLeft: 10 }}>{route.params.profEmail || "my.email@gmail.com"}</Text>
+          <Text style={{ color: "#616161", marginLeft: 10 }}>{useremail || "my.email@gmail.com"}</Text>
         </View>
       </View>
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //formik
 import { Formik } from "formik";
@@ -47,6 +48,17 @@ const Login = ({ navigation }) => {
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
 
+  const storeData = async (value, value1) => {
+    try {
+      await AsyncStorage.setItem("name", value);
+      await AsyncStorage.setItem("email", value1);
+      navigation.navigate("Home");
+    } catch (e) {
+      // saving error
+      console.log(e);
+    }
+  };
+
   const handleLogin = (credentials, setSubmitting) => {
     handleMessage(null);
     const url = "https://blooming-brushlands-85049.herokuapp.com/user/signin";
@@ -60,8 +72,12 @@ const Login = ({ navigation }) => {
         if (status !== "SUCCESS") {
           handleMessage(message, status);
         } else {
-          ``;
-          navigation.navigate("Home", { ...data[0] });
+          storeData(data[0].name, data[0].email);
+          {
+            console.log(data[0].name);
+            console.log(data[0].email);
+          }
+          // navigation.navigate("Home", { ...data[0] });
         }
         setSubmitting(false);
       })
