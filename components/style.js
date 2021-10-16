@@ -187,3 +187,85 @@ export const TextLinkContent = styled.Text`
   color: ${brand};
   font-size: 15px;
 `;
+
+
+export const RewardContainer = styled.View`
+  padding-bottom: 10px;
+  padding-left: 10px;
+  alignSelf: center;
+  width: 90%;
+  height:105px;
+  flex-direction: row;
+  backgroundColor: lightgrey;
+  borderRadius: 10;
+  
+`;
+
+export const RewardsImage = styled.Image`
+  width: 80px;
+  height: 80px;
+  alignContent: flex-start;
+  position: relative;
+  top: 2;
+  left: 2;
+`;
+
+export const RewardsDetailsBox = styled.View`
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  backgroundColor: transparent;
+  margin-left: 95px;
+`;
+
+export const VoucherName = styled.Text`
+  font-size: 16px;
+  padding-top: 17px;
+  padding-left: 5px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: ${tertiary};
+`;
+
+export const VoucherDes = styled.Text`
+  font-size: 11px;
+  padding-top: 1px;
+  padding-left: 5px;
+  letter-spacing: 1px;
+  color: ${tertiary};
+`;
+
+export const VoucherPoints = styled.Text`
+  font-size: 18px;
+  padding-top: 15px;
+  padding-left: 270px;
+  letter-spacing: 1px;
+  color: ${tertiary};
+  position: absolute;
+
+
+`;
+
+export const ClaimRewardButton = styled.TouchableOpacity`
+  padding: 5px;
+  background-color:green;
+  justify-content: center;
+  align-items: center;
+  align-self: baseline;
+  border-radius: 5px;
+  height: 40px;
+  position: absolute
+  flex-direction: row;
+  margin-horizontal: 240;
+  margin-vertical: 50;
+
+
+  ${(props) =>
+    props.ticket == true &&
+    `
+    background-color: {green};
+    flex-direction: row;
+    justify-content = center;
+`}
+`;
+
