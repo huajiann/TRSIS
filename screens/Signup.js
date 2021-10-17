@@ -80,7 +80,7 @@ const Signup = ({ navigation }) => {
         if (status !== "SUCCESS") {
           handleMessage(message, status);
         } else {
-          navigation.navigate("Tabs", { ...data });
+          navigation.navigate("Home", { ...data });
         }
         setSubmitting(false);
       })
