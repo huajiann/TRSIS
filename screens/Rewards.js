@@ -1,10 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { View, SafeAreaView, Button, StyleSheet, Platform, StatusBar, Image } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  Button,
+  StyleSheet,
+  Platform,
+  StatusBar,
+  Image,
+  Modal,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import { Avatar, Title, Caption, Text, TouchableRipple } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+//API Client
+import axios from "axios";
+
 //colors
 import { Colors } from "./../components/style";
+import { Entypo } from "@expo/vector-icons";
 
 import {
   // Header,
@@ -20,27 +35,114 @@ import {
   ButtonText,
   StyledButton,
 } from "./../components/style";
+import { createIconSetFromFontello } from "react-native-vector-icons";
 
-import { Entypo } from "@expo/vector-icons";
 //Colors
 const { brand, darkLight, primary } = Colors;
 
+const ModalPop = ({ visible, children }) => {
+  const [showModal, setShowModal] = useState(visible);
+
+  useEffect(() => {
+    toggleModal();
+  }, [visible]);
+
+  const toggleModal = () => {
+    if (visible) {
+      setShowModal(true);
+    } else {
+      setShowModal(false);
+    }
+  };
+  return (
+    <Modal transparent visible={showModal}>
+      <View style={styles.modalBackground}>
+        <View style={styles.modalContainer}>{children}</View>
+      </View>
+    </Modal>
+  );
+};
+
 const Rewards = ({ navigation }) => {
   const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
   const [points, setPoints] = useState();
+  const [visible, setVisible] = useState(false);
+  const [message, setMessage] = useState();
+  const [messageType, setMessageType] = useState();
+  const [loading, setLoading] = useState(false);
 
   const getUserData = async () => {
     try {
       const value = await AsyncStorage.getItem("name");
+      const email = await AsyncStorage.getItem("email");
       const point = await AsyncStorage.getItem("points");
       if (value !== null) {
         // value previously stored
         setUsername(value);
         setPoints(point);
+        setEmail(email);
       }
     } catch (e) {
       // error reading value
     }
+  };
+
+  const combined = (value) => {
+    setLoading(true);
+    handleUpdatePoints(value);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  };
+
+  const handleUpdatePoints = (pointsValue) => {
+    try {
+      //something must be done here..
+      const userPoints = parseInt(points);
+      const newUserPoints = userPoints - pointsValue;
+      console.log("Redeemed :" + newUserPoints);
+      newUserPoints.toString();
+      updateData(newUserPoints);
+    } catch (e) {
+      //error goes here
+      console.log(e);
+    }
+  };
+
+  const updateData = (point) => {
+    handleMessage(null);
+    const url = "https://blooming-brushlands-85049.herokuapp.com/user/update";
+    const creds = { email: email, points: point };
+    const pointStr = point.toString();
+    try {
+      axios
+        .put(url, creds)
+        .then(async (response) => {
+          const result = response.data;
+          const { success } = result;
+
+          if (success !== true) {
+            handleMessage("An error occurred! Please try again.");
+          } else {
+            await AsyncStorage.setItem("points", pointStr);
+            setPoints(pointStr);
+            console.log("Success!");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          handleMessage("An error occurred! Please check your network and try again.");
+        });
+    } catch (e) {
+      // saving error
+      console.log("Error" + e);
+    }
+  };
+
+  const handleMessage = (message, type = "FAILED") => {
+    setMessage(message);
+    setMessageType(type);
   };
 
   useEffect(() => {
@@ -82,6 +184,44 @@ const Rewards = ({ navigation }) => {
         {/* You may start coding here. :D*/}
 
         <View style={styles.menuWrapper}>
+          <ModalPop visible={visible}>
+            <View style={{ alignItems: "center" }}>
+              <View style={styles.modalHeader}>
+                <TouchableOpacity onPress={() => setVisible(false)}>
+                  <Entypo name="cross" size={24} color="black" />
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            {loading ? (
+              <ActivityIndicator
+                //visibility of Overlay Loading Spinner
+                visible={loading}
+                //Text with the Spinner
+                textContent={"Verifying..."}
+                size="large"
+                color={brand}
+              />
+            ) : (
+              <>
+                <Image
+                  source={require("./../assets/img/shopee.png")}
+                  style={{ marginBottom: 15, height: 70, width: 70 }}
+                />
+                <Text style={{ fontSize: 28, textAlign: "left", fontWeight: "bold" }}>Redeem Voucher</Text>
+                <Text style={{ marginVertical: 30, fontSize: 20, textAlign: "left" }}>
+                  Redeem RM5 Shopee Voucher for 10 Pts?
+                </Text>
+                <Button
+                  title="REDEEM NOW"
+                  color={brand}
+                  onPress={() => {
+                    combined(10);
+                  }}
+                />
+              </>
+            )}
+          </ModalPop>
           <RewardContainer>
             <RewardsImage
               resizeMode="cover"
@@ -98,7 +238,7 @@ const Rewards = ({ navigation }) => {
               <VoucherDes>RM5.00 Shopee Voucher</VoucherDes>
             </RewardsDetailsBox>
             <VoucherPoints>10 Pts</VoucherPoints>
-            <ClaimRewardButton>
+            <ClaimRewardButton onPress={() => setVisible(true)}>
               <Entypo name="ticket" color={primary} size={25} />
               <ButtonText ticket={true}> Claim </ButtonText>
             </ClaimRewardButton>
@@ -234,5 +374,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "aquamarine",
     //paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalContainer: {
+    width: "80%",
+    backgroundColor: "white",
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    borderRadius: 20,
+    elevation: 20,
+  },
+  modalHeader: {
+    width: "100%",
+    height: 40,
+    alignItems: "flex-end",
+    justifyContent: "center",
   },
 });

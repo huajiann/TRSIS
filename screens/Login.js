@@ -96,8 +96,6 @@ const Login = ({ navigation }) => {
     setMessageType(type);
   };
 
-  const handleUpdatePoints = () => {};
-
   return (
     <KeyboardAvoidingWrapper>
       <StyledContainer>
