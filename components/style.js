@@ -188,34 +188,31 @@ export const TextLinkContent = styled.Text`
   font-size: 15px;
 `;
 
-
 export const RewardContainer = styled.View`
   padding-bottom: 10px;
   padding-left: 10px;
-  alignSelf: center;
-  width: 90%;
-  height:105px;
+  align-self: center;
+  width: 95%;
+  height: 105px;
   flex-direction: row;
-  backgroundColor: lightgrey;
-  borderRadius: 10;
-  
+  background-color: white;
+  border-radius: 15px;
+  elevation: 5;
 `;
 
 export const RewardsImage = styled.Image`
   width: 80px;
   height: 80px;
-  alignContent: flex-start;
+  align-content: flex-start;
   position: relative;
-  top: 2;
-  left: 2;
 `;
 
 export const RewardsDetailsBox = styled.View`
   flex-direction: column;
   align-items: flex-start;
   position: absolute;
-  backgroundColor: transparent;
-  margin-left: 95px;
+  background-color: transparent;
+  margin-left: 90px;
 `;
 
 export const VoucherName = styled.Text`
@@ -238,12 +235,10 @@ export const VoucherDes = styled.Text`
 export const VoucherPoints = styled.Text`
   font-size: 18px;
   padding-top: 15px;
-  padding-left: 270px;
+  padding-left: 295px;
   letter-spacing: 1px;
   color: ${tertiary};
   position: absolute;
-
-
 `;
 
 export const ClaimRewardButton = styled.TouchableOpacity`
@@ -256,8 +251,8 @@ export const ClaimRewardButton = styled.TouchableOpacity`
   height: 40px;
   position: absolute
   flex-direction: row;
-  margin-horizontal: 240;
-  margin-vertical: 50;
+  margin-horizontal: 275px;
+  margin-vertical: 50px;
 
 
   ${(props) =>
@@ -268,4 +263,3 @@ export const ClaimRewardButton = styled.TouchableOpacity`
     justify-content = center;
 `}
 `;
-

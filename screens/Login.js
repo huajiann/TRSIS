@@ -48,10 +48,11 @@ const Login = ({ navigation }) => {
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
 
-  const storeData = async (value, value1) => {
+  const storeData = async (value, value1, points) => {
     try {
       await AsyncStorage.setItem("name", value);
       await AsyncStorage.setItem("email", value1);
+      await AsyncStorage.setItem("points", points);
       navigation.navigate("Home");
     } catch (e) {
       // saving error
@@ -72,10 +73,12 @@ const Login = ({ navigation }) => {
         if (status !== "SUCCESS") {
           handleMessage(message, status);
         } else {
-          storeData(data[0].name, data[0].email);
+          let p = data[0].points.toString();
+          storeData(data[0].name, data[0].email, p);
           {
             console.log(data[0].name);
             console.log(data[0].email);
+            console.log(data[0].points);
           }
           // navigation.navigate("Home", { ...data[0] });
         }
@@ -92,6 +95,8 @@ const Login = ({ navigation }) => {
     setMessage(message);
     setMessageType(type);
   };
+
+  const handleUpdatePoints = () => {};
 
   return (
     <KeyboardAvoidingWrapper>

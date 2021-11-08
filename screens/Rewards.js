@@ -3,32 +3,50 @@ import { View, SafeAreaView, Button, StyleSheet, Platform, StatusBar, Image } fr
 import { Avatar, Title, Caption, Text, TouchableRipple } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 //colors
 import { Colors } from "./../components/style";
 
 import {
   // Header,
   // IconButton,
-  ClaimRewardButton, 
-  VoucherName, 
-  RewardsImage, 
-  RewardContainer, 
-  VoucherPoints, 
-  VoucherDes, 
+  ClaimRewardButton,
+  VoucherName,
+  RewardsImage,
+  RewardContainer,
+  VoucherPoints,
+  VoucherDes,
   RewardsDetailsBox,
   Line,
   ButtonText,
-  StyledButton
+  StyledButton,
+} from "./../components/style";
 
-} from "./../components/style"
-
-import { Entypo } from "@expo/vector-icons"; 
+import { Entypo } from "@expo/vector-icons";
 //Colors
 const { brand, darkLight, primary } = Colors;
 
-
 const Rewards = ({ navigation }) => {
+  const [username, setUsername] = useState();
+  const [points, setPoints] = useState();
+
+  const getUserData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("name");
+      const point = await AsyncStorage.getItem("points");
+      if (value !== null) {
+        // value previously stored
+        setUsername(value);
+        setPoints(point);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   return (
     <SafeAreaView style={styles.AndroidSafeArea}>
       <View style={styles.userInfoSection}>
@@ -44,9 +62,9 @@ const Rewards = ({ navigation }) => {
                 },
               ]}
             >
-              Your Name
+              {username || "Your Name"}
             </Title>
-            <Caption style={styles.caption}>Points : 420</Caption>
+            <Caption style={styles.caption}>Points : {points || "00"}</Caption>
           </View>
         </View>
       </View>
@@ -61,104 +79,104 @@ const Rewards = ({ navigation }) => {
           flex: 1,
         }}
       >
-         {/* You may start coding here. :D*/}
-      
-      <View style={styles.menuWrapper}>
-      <RewardContainer>
-           <RewardsImage 
-              resizeMode="cover" 
-              source={require("./../assets/img/img1.jpg")}
+        {/* You may start coding here. :D*/}
+
+        <View style={styles.menuWrapper}>
+          <RewardContainer>
+            <RewardsImage
+              resizeMode="cover"
+              source={require("./../assets/img/shopee.png")}
               style={{
-                position: 'relative',
+                position: "relative",
                 marginLeft: 0,
                 marginTop: 10,
                 borderRadius: 30,
               }}
-              />
-              <RewardsDetailsBox>
-                <VoucherName >RewardsName</VoucherName>
-                <VoucherDes >Rewards Description</VoucherDes>
-              </RewardsDetailsBox>
-              <VoucherPoints >10 Pts</VoucherPoints>
-              <ClaimRewardButton>
-                <Entypo name="ticket" color={primary} size={25} />
-                <ButtonText ticket={true} > Claim </ButtonText>
-              </ClaimRewardButton>    
-     </RewardContainer>
-      </View>
-      {/*from below here it shall start duplicating :3*/}
-      <View style={styles.menuWrapper}>
-      <RewardContainer>
-           <RewardsImage 
-              resizeMode="cover" 
-              source={require("./../assets/img/img1.jpg")}
+            />
+            <RewardsDetailsBox>
+              <VoucherName>Shopee</VoucherName>
+              <VoucherDes>RM5.00 Shopee Voucher</VoucherDes>
+            </RewardsDetailsBox>
+            <VoucherPoints>10 Pts</VoucherPoints>
+            <ClaimRewardButton>
+              <Entypo name="ticket" color={primary} size={25} />
+              <ButtonText ticket={true}> Claim </ButtonText>
+            </ClaimRewardButton>
+          </RewardContainer>
+        </View>
+        {/*from below here it shall start duplicating :3*/}
+        <View style={styles.menuWrapper}>
+          <RewardContainer>
+            <RewardsImage
+              resizeMode="cover"
+              source={require("./../assets/img/social-Lazada-Logo.png")}
               style={{
-                position: 'relative',
+                position: "relative",
                 marginLeft: 0,
                 marginTop: 10,
                 borderRadius: 30,
               }}
-              />
-              <RewardsDetailsBox>
-                <VoucherName >RewardsName</VoucherName>
-                <VoucherDes >Rewards Description</VoucherDes>
-              </RewardsDetailsBox>
-              <VoucherPoints >10 Pts</VoucherPoints>
-              <ClaimRewardButton>
-                <Entypo name="ticket" color={primary} size={25} />
-                <ButtonText ticket={true} > Claim </ButtonText>
-              </ClaimRewardButton>    
-     </RewardContainer>
-      </View>
-      {/*below here also duplicate*/}
-      <View style={styles.menuWrapper}>
-      <RewardContainer>
-           <RewardsImage 
-              resizeMode="cover" 
-              source={require("./../assets/img/img1.jpg")}
+            />
+            <RewardsDetailsBox>
+              <VoucherName>Lazada</VoucherName>
+              <VoucherDes>RM3.00 Lazada Voucher</VoucherDes>
+            </RewardsDetailsBox>
+            <VoucherPoints>10 Pts</VoucherPoints>
+            <ClaimRewardButton>
+              <Entypo name="ticket" color={primary} size={25} />
+              <ButtonText ticket={true}> Claim </ButtonText>
+            </ClaimRewardButton>
+          </RewardContainer>
+        </View>
+        {/*below here also duplicate*/}
+        <View style={styles.menuWrapper}>
+          <RewardContainer>
+            <RewardsImage
+              resizeMode="cover"
+              source={require("./../assets/img/Zalora_sg.jpg")}
               style={{
-                position: 'relative',
+                position: "relative",
                 marginLeft: 0,
                 marginTop: 10,
                 borderRadius: 30,
               }}
-              />
-              <RewardsDetailsBox>
-                <VoucherName >RewardsName</VoucherName>
-                <VoucherDes >Rewards Description</VoucherDes>
-              </RewardsDetailsBox>
-              <VoucherPoints >10 Pts</VoucherPoints>
-              <ClaimRewardButton>
-                <Entypo name="ticket" color={primary} size={25} />
-                <ButtonText ticket={true} > Claim </ButtonText>
-              </ClaimRewardButton>    
-     </RewardContainer>
-      </View>
-      {/*another duplicates aih*/}
-      <View style={styles.menuWrapper}>
-      <RewardContainer>
-           <RewardsImage 
-              resizeMode="cover" 
-              source={require("./../assets/img/img1.jpg")}
+            />
+            <RewardsDetailsBox>
+              <VoucherName>Zalora</VoucherName>
+              <VoucherDes>RM10.00 Zalora Voucher</VoucherDes>
+            </RewardsDetailsBox>
+            <VoucherPoints>30 Pts</VoucherPoints>
+            <ClaimRewardButton>
+              <Entypo name="ticket" color={primary} size={25} />
+              <ButtonText ticket={true}> Claim </ButtonText>
+            </ClaimRewardButton>
+          </RewardContainer>
+        </View>
+        {/*another duplicates aih*/}
+        <View style={styles.menuWrapper}>
+          <RewardContainer>
+            <RewardsImage
+              resizeMode="cover"
+              source={require("./../assets/img/grab.png")}
               style={{
-                position: 'relative',
+                position: "relative",
                 marginLeft: 0,
                 marginTop: 10,
                 borderRadius: 30,
               }}
-              />
-              <RewardsDetailsBox>
-                <VoucherName >RewardsName</VoucherName>
-                <VoucherDes >Rewards Description</VoucherDes>
-              </RewardsDetailsBox>
-              <VoucherPoints >10 Pts</VoucherPoints>
-              <ClaimRewardButton>
-                <Entypo name="ticket" color={primary} size={25} />
-                <ButtonText ticket={true} > Claim </ButtonText>
-              </ClaimRewardButton>    
-     </RewardContainer>
-      </View>
-      {/*ok duplicate ends here HAHAH*/}
+            />
+            <RewardsDetailsBox>
+              <VoucherName>Grab Food</VoucherName>
+              <VoucherDes>Free Delivery Voucher</VoucherDes>
+            </RewardsDetailsBox>
+            <VoucherPoints>50 Pts</VoucherPoints>
+            <ClaimRewardButton>
+              <Entypo name="ticket" color={primary} size={25} />
+              <ButtonText ticket={true}> Claim </ButtonText>
+            </ClaimRewardButton>
+          </RewardContainer>
+        </View>
+        {/*ok duplicate ends here HAHAH*/}
       </View>
     </SafeAreaView>
   );
@@ -198,7 +216,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   menuWrapper: {
-    marginTop: 10,
+    marginTop: 15,
   },
   menuItem: {
     flexDirection: "row",
@@ -217,6 +235,4 @@ const styles = StyleSheet.create({
     backgroundColor: "aquamarine",
     //paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
-
-
 });

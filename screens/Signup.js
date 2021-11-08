@@ -119,7 +119,7 @@ const Signup = ({ navigation }) => {
           <Formik
             initialValues={{ name: "", email: "", dateOfBirth: "", password: "", confirmPassword: "" }}
             onSubmit={(values, { setSubmitting }) => {
-              values = { ...values, dateOfBirth: dob };
+              values = { ...values, dateOfBirth: dob, points: 10 };
               if (
                 values.email == "" ||
                 values.password == "" ||
