@@ -68,9 +68,11 @@ const Rewards = ({ navigation }) => {
   const [email, setEmail] = useState();
   const [points, setPoints] = useState();
   const [visible, setVisible] = useState(false);
+  const [visible1, setVisible1] = useState(false);
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const getUserData = async () => {
     try {
@@ -93,6 +95,7 @@ const Rewards = ({ navigation }) => {
     handleUpdatePoints(value);
     setTimeout(() => {
       setLoading(false);
+      setVisible(false);
     }, 3000);
   };
 
@@ -100,10 +103,13 @@ const Rewards = ({ navigation }) => {
     try {
       //something must be done here..
       const userPoints = parseInt(points);
-      const newUserPoints = userPoints - pointsValue;
-      console.log("Redeemed :" + newUserPoints);
-      newUserPoints.toString();
-      updateData(newUserPoints);
+      if (userPoints < pointsValue) {
+        //do modal here?
+      } else {
+        const newUserPoints = userPoints - pointsValue;
+        newUserPoints.toString();
+        updateData(newUserPoints);
+      }
     } catch (e) {
       //error goes here
       console.log(e);
@@ -128,6 +134,9 @@ const Rewards = ({ navigation }) => {
             await AsyncStorage.setItem("points", pointStr);
             setPoints(pointStr);
             console.log("Success!");
+            setVisible1(true);
+            setSuccess(true);
+            //do modal here too
           }
         })
         .catch((error) => {
@@ -219,6 +228,39 @@ const Rewards = ({ navigation }) => {
                     combined(10);
                   }}
                 />
+              </>
+            )}
+          </ModalPop>
+          <ModalPop visible={visible1}>
+            <View style={{ alignItems: "center" }}>
+              <View style={styles.modalHeader}>
+                <TouchableOpacity onPress={() => setVisible1(false)}>
+                  <Entypo name="cross" size={24} color="black" />
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            {success ? (
+              <>
+                <Image
+                  source={require("./../assets/img/shopee.png")}
+                  style={{ marginBottom: 15, height: 70, width: 70 }}
+                />
+                <Text style={{ fontSize: 28, textAlign: "left", fontWeight: "bold" }}>Successful Redeem!</Text>
+                <Text style={{ marginVertical: 30, fontSize: 20, textAlign: "left" }}>Code : QWER-TYUI-1244</Text>
+                <Button title="COPY CODE" color={brand} />
+              </>
+            ) : (
+              <>
+                <Image
+                  source={require("./../assets/img/shopee.png")}
+                  style={{ marginBottom: 15, height: 70, width: 70 }}
+                />
+                <Text style={{ fontSize: 28, textAlign: "left", fontWeight: "bold" }}>Not Enough Points</Text>
+                <Text style={{ marginVertical: 30, fontSize: 20, textAlign: "left" }}>
+                  Opps! It seems you have insufficient points! Earn more points by recycling!
+                </Text>
+                <Button title="GOT IT" color={brand} />
               </>
             )}
           </ModalPop>
