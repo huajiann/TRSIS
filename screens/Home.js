@@ -6,7 +6,23 @@ import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
+
 import { PageTitle, SubTitle, InnerContainer } from "./../components/style";
+import { NavigationContainer } from "@react-navigation/native";
+
+import { createStackNavigator } from "@react-navigation/stack";
+
+import Login from "./../screens/Login";
+import Signup from "./../screens/Signup";
+import Homes from "./../screens/Home";
+import Scans from "../screens/Scan";
+
+
+import { Colors } from "./../components/style";
+const { brand, darkLight, primary } = Colors;
+
+//const Stack = createStackNavigator();
 
 const Home = ({ navigation, route }) => {
   const [binID, setbinID] = useState();
@@ -70,6 +86,7 @@ const Home = ({ navigation, route }) => {
 
   //const { name, email } = route.params;
   return (
+    
     <>
       <StatusBar style="dark" />
       <InnerContainer>
@@ -136,7 +153,7 @@ const Home = ({ navigation, route }) => {
           <View style={{ height: 150 }}>
             <View style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}>
               <TouchableOpacity
-                onPress={() => navigation.navigate("Scan")} //to be change
+                onPress={() => navigation.navigate('Scans')} //to be change
                 style={{
                   height: 110,
                   elevation: 3,
@@ -149,7 +166,7 @@ const Home = ({ navigation, route }) => {
                   justifyContent: "center",
                 }}
               >
-                <Icon name="qr-code-outline" color="#000" size={50} />
+                <Icon name="camera" color={brand} size={50}  />
                 <View
                   style={{
                     flexDirection: "row",
@@ -167,7 +184,8 @@ const Home = ({ navigation, route }) => {
                   </Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity
+
+               {/*<TouchableOpacity
                 onPress={() => navigation.navigate("Rewards")} //to be change
                 style={{
                   height: 110,
@@ -231,8 +249,8 @@ const Home = ({ navigation, route }) => {
                   >
                     Profile
                   </Text>
-                </View>
-              </TouchableOpacity>
+                </View> 
+              </TouchableOpacity>*/}
             </View>
             <View
               style={{

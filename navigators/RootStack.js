@@ -7,6 +7,10 @@ const { primary, tertiary, secondary } = Colors;
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+//bottom
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 //screens
 import Login from "./../screens/Login";
 import Signup from "./../screens/Signup";
@@ -14,8 +18,14 @@ import Home from "./../screens/Home";
 import Rewards from "../screens/Rewards";
 import Scan from "../screens/Scan";
 import Profile from "../screens/Profile";
+import MainContainer from "./MainContainer";
 
+//Screen names
+const homeName = "Home";
+const rewardsName = "Rewards";
+const profileName = "Profile";
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const RootStack = () => {
   return (
@@ -44,7 +54,7 @@ const RootStack = () => {
           component={Home}
         />
         <Stack.Screen options={{ headerTintColor: "#000", headerTitle: "Scan" }} name="Scan" component={Scan} />
-        <Stack.Screen
+        {/* <Stack.Screen
           options={{ headerTintColor: "#000", headerTitle: "Rewards" }}
           name="Rewards"
           component={Rewards}
@@ -53,9 +63,16 @@ const RootStack = () => {
           options={{ headerTintColor: "#000", headerTitle: "Profile" }}
           name="Profile"
           component={Profile}
-        />
+        /> */}
+
+      
       </Stack.Navigator>
+      
     </NavigationContainer>
+    
+    
+
+
   );
 };
 

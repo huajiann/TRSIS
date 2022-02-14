@@ -28,7 +28,7 @@ const Scan = ({ navigation, route }) => {
 
   // Check permissions
   if (hasPermission === null) {
-    return (
+    return ( 
       <View style={styles.container}>
         <Text>Requesting for camera permission</Text>
       </View>

@@ -157,7 +157,7 @@ const Rewards = ({ navigation }) => {
                 <ButtonText ticket={true} > Claim </ButtonText>
               </ClaimRewardButton>    
      </RewardContainer>
-      </View>
+      </View> 
       {/*ok duplicate ends here HAHAH*/}
       </View>
     </SafeAreaView>
