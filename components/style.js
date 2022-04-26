@@ -7,9 +7,9 @@ const StatusBarHeight = Constants.statusBarHeight;
 export const Colors = {
   primary: "#ffffff",
   secondary: "#E5E7EB",
-  tertiary: "#1F2937",
+  tertiary: "#28495c",
   darkLight: "#9CA3AF",
-  brand: "#167e64",
+  brand: "#699277",
   green: "#10B981",
   red: "#EF4444",
 };
@@ -73,6 +73,7 @@ export const PageTitle = styled.Text`
 export const SubTitle = styled.Text`
   font-size: 18px;
   margin-bottom: 20px;
+  margin-left: 30px;
   letter-spacing: 1px;
   font-weight: bold;
   color: ${tertiary};
@@ -189,7 +190,7 @@ export const TextLinkContent = styled.Text`
 `;
 
 export const RewardContainer = styled.View`
-  padding-bottom: 10px;
+  padding-bottom: 1px;
   padding-left: 10px;
   align-self: center;
   width: 95%;
@@ -235,15 +236,69 @@ export const VoucherDes = styled.Text`
 export const VoucherPoints = styled.Text`
   font-size: 18px;
   padding-top: 15px;
-  padding-left: 295px;
+  padding-left: 270px;
   letter-spacing: 1px;
   color: ${tertiary};
   position: absolute;
 `;
 
+export const NewsContainer = styled.TouchableOpacity`
+  padding-bottom: 10px;
+  padding-left: 10px;
+  align-self: center;
+  width: 95%;
+  height: 200px;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 15px;
+  elevation: 5;
+`;
+
+export const NewsImage = styled.Image`
+  width: 100%;
+  height: 125px;
+  align-content: flex-start;
+  position: relative;
+`;
+
+export const NewsDetailsBox = styled.View`
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  background-color: transparent;
+  margin-left: 10px;
+  margin-top: 130px;
+`;
+
+export const NewsTitle = styled.Text`
+  font-size: 16px;
+  padding-top: 17px;
+  padding-left: 5px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: ${tertiary};
+`;
+
+export const NewsDes = styled.Text`
+  font-size: 11px;
+  padding-top: 1px;
+  padding-left: 5px;
+  letter-spacing: 1px;
+  color: ${tertiary};
+`;
+
+export const HeaderTitle = styled.Text`
+  font-size: 16px;
+  padding-top: 1px;
+  padding-left: 5px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: black;
+`;
+
 export const ClaimRewardButton = styled.TouchableOpacity`
   padding: 5px;
-  background-color:green;
+  background-color:#699277;
   justify-content: center;
   align-items: center;
   align-self: baseline;
@@ -251,7 +306,7 @@ export const ClaimRewardButton = styled.TouchableOpacity`
   height: 40px;
   position: absolute
   flex-direction: row;
-  margin-horizontal: 275px;
+  margin-horizontal: 250px;
   margin-vertical: 50px;
 
 

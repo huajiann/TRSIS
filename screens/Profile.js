@@ -4,6 +4,7 @@ import { Avatar, Title, Caption, Text, TouchableRipple } from "react-native-pape
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Profile = ({ navigation, route }) => {
   const [username, setUsername] = useState();
@@ -28,101 +29,109 @@ const Profile = ({ navigation, route }) => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.AndroidSafeArea}>
-      <View style={styles.userInfoSection}>
-        <View style={{ flexDirection: "row", marginTop: 100 }}>
-          <Avatar.Image source={require("./../assets/icons/betteruser.png")} size={80} backgroundColor={"#7FFFD4"} />
-          <View style={{ marginLeft: 20 }}>
-            <Title
+    <ScrollView>
+      <SafeAreaView style={styles.AndroidSafeArea}>
+        <View style={styles.userInfoSection}>
+          <View style={{ flexDirection: "row", marginTop: 100 }}>
+            <Avatar.Image source={require("./../assets/icons/betteruser.png")} size={80} backgroundColor={"#A2E4B8"} />
+            <View style={{ marginLeft: 20 }}>
+              <Title
+                style={[
+                  styles.title,
+                  {
+                    marginTop: 15,
+                    marginBottom: 5,
+                  },
+                ]}
+              >
+                {username || "Your Name"}
+              </Title>
+              <Caption style={styles.caption}>Recycling is fun!</Caption>
+            </View>
+          </View>
+        </View>
+        <View style={styles.userInfoSection}>
+          <View style={styles.row}>
+            <Icon name="map-marker-radius" color="#616161" size={20} />
+            <Text style={{ color: "#616161", marginLeft: 10 }}>Kuala Lumpur, Malaysia</Text>
+          </View>
+          <View style={styles.row}>
+            <Icon name="email" color="#616161" size={20} />
+            <Text style={{ color: "#616161", marginLeft: 10 }}>{useremail || "my.email@gmail.com"}</Text>
+          </View>
+        </View>
+
+        <View
+          style={{
+            backgroundColor: "#fff",
+            height: "100%",
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
+            elevation: 30,
+            flex: 1,
+          }}
+        >
+          <View style={styles.infoBoxWrapper}>
+            <View
               style={[
-                styles.title,
+                styles.infoBox,
                 {
+                  borderRightColor: "darkgrey",
+                  borderRightWidth: 2,
                   marginTop: 15,
-                  marginBottom: 5,
+                  marginBottom: 15,
                 },
               ]}
             >
-              {username || "Your Name"}
-            </Title>
-            <Caption style={styles.caption}>Recycling is fun!</Caption>
+              <Title>420</Title>
+              <Caption>Points Earned</Caption>
+            </View>
+            <View style={styles.infoBox}>
+              <Title>69</Title>
+              <Caption>Trash Recycled</Caption>
+            </View>
           </View>
-        </View>
-      </View>
-      <View style={styles.userInfoSection}>
-        <View style={styles.row}>
-          <Icon name="map-marker-radius" color="#616161" size={20} />
-          <Text style={{ color: "#616161", marginLeft: 10 }}>Kuala Lumpur, Malaysia</Text>
-        </View>
-        <View style={styles.row}>
-          <Icon name="email" color="#616161" size={20} />
-          <Text style={{ color: "#616161", marginLeft: 10 }}>{useremail || "my.email@gmail.com"}</Text>
-        </View>
-      </View>
-
-      <View
-        style={{
-          backgroundColor: "#fff",
-          height: "100%",
-          borderTopLeftRadius: 30,
-          borderTopRightRadius: 30,
-          elevation: 30,
-          flex: 1,
-        }}
-      >
-        <View style={styles.infoBoxWrapper}>
-          <View
-            style={[
-              styles.infoBox,
-              {
-                borderRightColor: "darkgrey",
-                borderRightWidth: 2,
-                marginTop: 15,
-                marginBottom: 15,
-              },
-            ]}
-          >
-            <Title>420</Title>
-            <Caption>Points Earned</Caption>
-          </View>
-          <View style={styles.infoBox}>
-            <Title>69</Title>
-            <Caption>Trash Recycled</Caption>
-          </View>
-        </View>
-        <View style={styles.menuWrapper}>
-          <TouchableRipple onPress={() => {}}>
-            <View style={styles.menuItem}>
-              <Icon name="recycle" color="#FF0000" size={25} />
-              <Text style={styles.menuItemText}>Recycled Items</Text>
-            </View>
-          </TouchableRipple>
-          <TouchableRipple onPress={() => {}}>
-            <View style={styles.menuItem}>
-              <Icon name="share-outline" color="#FF0000" size={25} />
-              <Text style={styles.menuItemText}>Tell Your Friends</Text>
-            </View>
-          </TouchableRipple>
-          <TouchableRipple onPress={() => {}}>
-            <View style={styles.menuItem}>
-              <Icon name="account-question-outline" color="#FF0000" size={25} />
-              <Text style={styles.menuItemText}>Support</Text>
-            </View>
-          </TouchableRipple>
-          <TouchableRipple onPress={() => {}}>
-            <View style={styles.menuItem}>
-              <Icon name="cog" color="#FF0000" size={25} />
-              <Text style={styles.menuItemText}>Settings</Text>
-            </View>
-          </TouchableRipple>
-          <TouchableRipple onPress={() => navigation.navigate("Login")}>
+          <View style={styles.menuWrapper}>
+            {/* <TouchableRipple onPress={() => navigation.navigate("Login")}>
             <View style={styles.menuItem}>
               <Icon name="logout" color="#FF0000" size={25} />
               <Text style={styles.menuItemText}>Logout</Text>
             </View>
-          </TouchableRipple>
+          </TouchableRipple> */}
+            <TouchableRipple onPress={() => {}}>
+              <View style={styles.menuItem}>
+                <Icon name="recycle" color="#28495c" size={25} />
+                <Text style={styles.menuItemText}>Recycled Items</Text>
+              </View>
+            </TouchableRipple>
+            <TouchableRipple onPress={() => {}}>
+              <View style={styles.menuItem}>
+                <Icon name="share-outline" color="#28495c" size={25} />
+                <Text style={styles.menuItemText}>Tell Your Friends</Text>
+              </View>
+            </TouchableRipple>
+            <TouchableRipple onPress={() => {}}>
+              <View style={styles.menuItem}>
+                <Icon name="account-question-outline" color="#28495c" size={25} />
+                <Text style={styles.menuItemText}>Support</Text>
+              </View>
+            </TouchableRipple>
+            <TouchableRipple onPress={() => {}}>
+              <View style={styles.menuItem}>
+                <Icon name="cog" color="#28495c" size={25} />
+                <Text style={styles.menuItemText}>Settings</Text>
+              </View>
+            </TouchableRipple>
+            <TouchableRipple onPress={() => navigation.navigate("Login")}>
+              <View style={styles.menuItem}>
+                <Icon name="logout" color="#28495c" size={25} />
+                <Text style={styles.menuItemText}>Logout</Text>
+              </View>
+            </TouchableRipple>
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ScrollView>
   );
 };
 
@@ -175,7 +184,7 @@ const styles = StyleSheet.create({
   },
   AndroidSafeArea: {
     flex: 1,
-    backgroundColor: "aquamarine",
+    backgroundColor: "#A2E4B8",
     //paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
 });
