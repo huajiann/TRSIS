@@ -7,7 +7,9 @@ import Icon from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { PageTitle, SubTitle, InnerContainer } from "./../components/style";
-
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+const Stack = createStackNavigator();
 const Home = ({ navigation, route }) => {
   const [binID, setbinID] = useState();
   const [status, setStatus] = useState();
@@ -71,7 +73,8 @@ const Home = ({ navigation, route }) => {
   //const { name, email } = route.params;
   return (
     <>
-      {/* <ScrollView> */}
+      {/* <NavigationContainer> */}
+      {/* <Stack.Navigator> */}
       <StatusBar style="dark" />
       <InnerContainer>
         <View
@@ -137,7 +140,7 @@ const Home = ({ navigation, route }) => {
           <View style={{ height: 150 }}>
             <View style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}>
               <TouchableOpacity
-                onPress={() => navigation.navigate("Scan")} //to be change
+                onPress={() => navigation.navigate("LeaderboardProfiles")} //to be change
                 style={{
                   height: 110,
                   elevation: 3,
@@ -164,10 +167,11 @@ const Home = ({ navigation, route }) => {
                       fontWeight: "normal",
                     }}
                   >
-                    Scan
+                    Leaderboard
                   </Text>
                 </View>
               </TouchableOpacity>
+
               <TouchableOpacity
                 onPress={() => navigation.navigate("Rewards")} //to be change
                 style={{
@@ -338,7 +342,8 @@ const Home = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
       </InnerContainer>
-      {/* </ScrollView> */}
+      {/* </Stack.Navigator> */}
+      {/* </NavigationContainer> */}
     </>
   );
 };
