@@ -19,9 +19,8 @@ const BtmTab = createBottomTabNavigator;
 const StkTab = createStackNavigator;
 
 // export default function App() {
-//   return <RootStack />;
+//   return <Leaderboard />;
 // }
-
 const App = () => {
   return (
     <NavigationContainer>

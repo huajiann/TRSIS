@@ -10,6 +10,7 @@ import Profile from "../screens/Profile";
 import EditProfile from "../screens/Profile";
 import Rewards from "../screens/Rewards";
 import News from "../screens/News";
+// import Leaderboards from "../screens/Leaderboards";
 import Login from "./../screens/Login";
 import Signup from "./../screens/Signup";
 
@@ -21,6 +22,7 @@ const HomeStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const RewardsStack = createStackNavigator();
 const NewsStack = createStackNavigator();
+const LeaderboardStack = createStackNavigator();
 
 const Stack = createStackNavigator();
 
@@ -114,6 +116,28 @@ const Tabs = ({ route }) => {
           headerShown: false,
         }}
       />
+      {/* <Stack.Screen
+        name="Leaderboards"
+        component={LeaderboardStackScreen}
+        // initialParams={{ userName: name, bin: bin }}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View style={{ alignItems: "center", justifyContent: "center", top: 5 }}>
+              <Image
+                source={require("../assets/icons/news.png")}
+                resizeMode="contain"
+                style={{
+                  width: 25,
+                  height: 25,
+                  marginBottom: 10,
+                  tintColor: focused ? "#28495c" : "#bfbebe",
+                }}
+              />
+            </View>
+          ),
+          headerShown: false,
+        }}
+      /> */}
       <Tab.Screen
         name="Scan"
         component={Scan}
@@ -252,6 +276,29 @@ const RewardStackScreen = ({ navigation, route }) => (
   </RewardsStack.Navigator>
 );
 
+const LeaderboardStackScreen = ({ navigation, route }) => (
+  <LeaderboardStack.Navigator
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: "#A2E4B8",
+        elevation: 0,
+        shadowColor: "#A2E4B8",
+      },
+      headerTintColor: "#000",
+      headerTintStyle: { fontWeight: "bold" },
+      headerLeft: false,
+    }}
+  >
+    <LeaderboardStack.Screen
+      name="Leaderboards"
+      component={Leaderboards}
+      // initialParams={{ userName: route.params.userName, bin: route.params.paramKey }}
+      options={{
+        headerShown: false,
+      }}
+    />
+  </LeaderboardStack.Navigator>
+);
 const ProfileStackScreen = ({ navigation, route }) => (
   <ProfileStack.Navigator
     screenOptions={{
