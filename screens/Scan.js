@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "aquamarine",
+    backgroundColor: "#A2E4B8",
   },
 
   barcodebox: {
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     width: 300,
     overflow: "hidden",
     borderRadius: 30,
-    backgroundColor: "aquamarine",
+    backgroundColor: "#A2E4B8",
   },
   maintext: {
     fontSize: 16,

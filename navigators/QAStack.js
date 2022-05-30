@@ -8,7 +8,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 //screens
-import Login from "./../screens/Login";
+import LeaderboardProfiles from "./../screens/LeaderboardProfiles";
 import Signup from "./../screens/Signup";
 // import Home from "./../screens/Home";
 // import Rewards from "../screens/Rewards";
@@ -16,11 +16,12 @@ import Signup from "./../screens/Signup";
 // import Profile from "../screens/Profile";
 import Tabs from "../components/Tabs";
 import Home from "../screens/Home";
-import QAStack from "./QAStack";
+
+const LeaderboardStack = createStackNavigator();
 
 const Stack = createStackNavigator();
 
-const RootStack = () => {
+const QAStack = () => {
   return (
     // <NavigationContainer>
     <Stack.Navigator
@@ -37,15 +38,41 @@ const RootStack = () => {
           paddingLeft: 20,
         },
       }}
-      initialRouteName="Login"
+      initialRouteName="LeaderboardProfiles"
     >
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Signup" component={Signup} />
-      <Stack.Screen name="LeaderboardProfiles" component={QAStack} />
+      <Stack.Screen
+        name="LeaderboardProfiles"
+        component={LeaderboardProfiles}
+        options={{ headerShown: false, headerTitle: false }}
+      />
       <Stack.Screen name="Home" component={Tabs} options={{ headerShown: false, headerTitle: false }} />
     </Stack.Navigator>
     // </NavigationContainer>
   );
 };
 
-export default RootStack;
+export default QAStack;
+
+const LeaderboardStackScreen = ({ navigation, route }) => (
+  <LeaderboardStack.Navigator
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: "#A2E4B8",
+        elevation: 0,
+        shadowColor: "#A2E4B8",
+      },
+      headerTintColor: "#000",
+      headerTintStyle: { fontWeight: "bold" },
+      headerLeft: false,
+    }}
+  >
+    <LeaderboardStack.Screen
+      name="LeaderboardProfiles"
+      component={LeaderboardProfiles}
+      // initialParams={{ userName: route.params.userName, bin: route.params.paramKey }}
+      options={{
+        headerShown: false,
+      }}
+    />
+  </LeaderboardStack.Navigator>
+);

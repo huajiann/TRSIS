@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { View, Image, Text } from "react-native";
-import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import Icon from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { PageTitle, SubTitle, InnerContainer } from "./../components/style";
-
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+const Stack = createStackNavigator();
 const Home = ({ navigation, route }) => {
   const [binID, setbinID] = useState();
   const [status, setStatus] = useState();
@@ -71,6 +73,8 @@ const Home = ({ navigation, route }) => {
   //const { name, email } = route.params;
   return (
     <>
+      {/* <NavigationContainer> */}
+      {/* <Stack.Navigator> */}
       <StatusBar style="dark" />
       <InnerContainer>
         <View
@@ -81,7 +85,7 @@ const Home = ({ navigation, route }) => {
         >
           <View
             style={{
-              backgroundColor: "aquamarine",
+              backgroundColor: "#A2E4B8",
               height: "30%",
               borderBottomLeftRadius: 20,
               borderBottomRightRadius: 20,
@@ -99,17 +103,17 @@ const Home = ({ navigation, route }) => {
             >
               <View style={{ width: "100%" }}>
                 <PageTitle welcome={true}>Hi! {username || "My name :,)"}</PageTitle>
-                <SubTitle>What are you going to do today?</SubTitle>
+                <SubTitle>Have you recycled today?</SubTitle>
               </View>
             </View>
           </View>
           <LinearGradient
-            colors={["rgba(127,255,212,1)", "transparent"]}
+            colors={["#A2E4B8", "transparent"]}
             style={{
               left: 0,
               right: 0,
               height: 50,
-              marginTop: -45,
+              marginTop: -20,
             }}
           ></LinearGradient>
           <View
@@ -125,7 +129,7 @@ const Home = ({ navigation, route }) => {
                 style={{
                   fontWeight: "bold",
                   fontSize: 18,
-                  color: "#3d3d3d",
+                  color: "#28495c",
                 }}
               >
                 Quick Actions
@@ -136,7 +140,7 @@ const Home = ({ navigation, route }) => {
           <View style={{ height: 150 }}>
             <View style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}>
               <TouchableOpacity
-                onPress={() => navigation.navigate("Scan")} //to be change
+                onPress={() => navigation.navigate("LeaderboardProfiles")} //to be change
                 style={{
                   height: 110,
                   elevation: 3,
@@ -149,7 +153,7 @@ const Home = ({ navigation, route }) => {
                   justifyContent: "center",
                 }}
               >
-                <Icon name="qr-code-outline" color="#000" size={50} />
+                <Icon name="qr-code-outline" color="#28495c" size={50} />
                 <View
                   style={{
                     flexDirection: "row",
@@ -163,10 +167,11 @@ const Home = ({ navigation, route }) => {
                       fontWeight: "normal",
                     }}
                   >
-                    Scan
+                    Leaderboard
                   </Text>
                 </View>
               </TouchableOpacity>
+
               <TouchableOpacity
                 onPress={() => navigation.navigate("Rewards")} //to be change
                 style={{
@@ -182,7 +187,7 @@ const Home = ({ navigation, route }) => {
                   justifyContent: "center",
                 }}
               >
-                <Icon name="gift-outline" color="#000" size={50} />
+                <Icon name="gift-outline" color="#28495c" size={50} />
                 <View
                   style={{
                     flexDirection: "row",
@@ -215,7 +220,7 @@ const Home = ({ navigation, route }) => {
                   justifyContent: "center",
                 }}
               >
-                <Icon name="person-circle-outline" color="#000" size={50} />
+                <Icon name="person-circle-outline" color="#28495c" size={50} />
                 <View
                   style={{
                     flexDirection: "row",
@@ -257,7 +262,7 @@ const Home = ({ navigation, route }) => {
                 style={{
                   fontWeight: "bold",
                   fontSize: 18,
-                  color: "#3d3d3d",
+                  color: "#28495c",
                 }}
               >
                 Smart Bin
@@ -298,7 +303,7 @@ const Home = ({ navigation, route }) => {
           <TouchableOpacity
             onPress={() => getData()}
             style={{
-              height: 220,
+              height: 130,
               elevation: 3,
               backgroundColor: "#FFF",
               marginLeft: 25,
@@ -337,6 +342,8 @@ const Home = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
       </InnerContainer>
+      {/* </Stack.Navigator> */}
+      {/* </NavigationContainer> */}
     </>
   );
 };
