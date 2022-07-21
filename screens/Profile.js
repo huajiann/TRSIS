@@ -84,7 +84,7 @@ const Profile = ({ navigation, route }) => {
               ]}
             >
               <Title>420</Title>
-              <Caption>Points Earned</Caption>
+              <Caption>Total Points Earned</Caption>
             </View>
             <View style={styles.infoBox}>
               <Title>69</Title>
@@ -98,7 +98,7 @@ const Profile = ({ navigation, route }) => {
               <Text style={styles.menuItemText}>Logout</Text>
             </View>
           </TouchableRipple> */}
-            <TouchableRipple onPress={() => {}}>
+            {/* <TouchableRipple onPress={() => {}}>
               <View style={styles.menuItem}>
                 <Icon name="recycle" color="#28495c" size={25} />
                 <Text style={styles.menuItemText}>Recycled Items</Text>
@@ -121,7 +121,7 @@ const Profile = ({ navigation, route }) => {
                 <Icon name="cog" color="#28495c" size={25} />
                 <Text style={styles.menuItemText}>Settings</Text>
               </View>
-            </TouchableRipple>
+            </TouchableRipple> */}
             <TouchableRipple onPress={() => navigation.navigate("Login")}>
               <View style={styles.menuItem}>
                 <Icon name="logout" color="#28495c" size={25} />

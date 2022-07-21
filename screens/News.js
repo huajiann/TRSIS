@@ -91,7 +91,7 @@ const News = ({ navigation }) => {
       <SafeAreaView style={styles.AndroidSafeArea}>
         {/*from below here it shall start duplicating :3*/}
         <View style={styles.menuWrapper}>
-          <NewsContainer onPress={() => navigation.navigate("Home")}>
+          <NewsContainer onPress={() => navigation.navigate("FirstNews")}>
             <NewsImage
               resizeMode="cover"
               source={require("./../assets/img/img2.png")}

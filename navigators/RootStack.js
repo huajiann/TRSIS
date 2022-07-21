@@ -17,6 +17,7 @@ import Signup from "./../screens/Signup";
 import Tabs from "../components/Tabs";
 import Home from "../screens/Home";
 import QAStack from "./QAStack";
+import NewsStack from "./NewsStack";
 
 const Stack = createStackNavigator();
 
@@ -42,6 +43,7 @@ const RootStack = () => {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Signup" component={Signup} />
       <Stack.Screen name="LeaderboardProfiles" component={QAStack} />
+      <Stack.Screen name="FirstNews" component={NewsStack} />
       <Stack.Screen name="Home" component={Tabs} options={{ headerShown: false, headerTitle: false }} />
     </Stack.Navigator>
     // </NavigationContainer>
