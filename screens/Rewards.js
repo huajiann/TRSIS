@@ -119,7 +119,7 @@ const Rewards = ({ navigation }) => {
 
   const updateData = (point) => {
     handleMessage(null);
-    const url = "https://blooming-brushlands-85049.herokuapp.com/user/update";
+    const url = "https://blooming-brushlands-85049.herokuapp.com/user/updatePoints";
     const creds = { email: email, points: point };
     const pointStr = point.toString();
     try {
