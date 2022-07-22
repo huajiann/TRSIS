@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Scan = ({ navigation, route }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const [scannedBin, setScannedBin] = useState(false);
   const [text, setText] = useState("Not yet scanned!");
 
   const askForCameraPemission = () => {
@@ -21,9 +22,24 @@ const Scan = ({ navigation, route }) => {
 
   // What happened when we scan the qrcode
   const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    setText("Bin ID : " + data);
-    console.log("Type : " + type + "\nData : " + data);
+
+    //setText(data);
+    const data_obj = JSON.parse(data);
+    //console.log("Type : " + type + "\nData : " + data_obj);
+    const data_id = data_obj.id;
+    const check_id = data_id.slice(0,5);
+
+    if(check_id == "TRSIS") {
+      setScanned(true);
+      setScannedBin(true);
+      setText("TRSIS Bin found : " + data_id);
+    } else if(check_id == "POINT"){
+      setScanned(true);
+      setText("Points : " + data_obj.points + "pts");
+    } else {
+      setScanned(true);
+      setText("Error, Please scan again.")
+    }
   };
 
   // Check permissions
@@ -67,9 +83,9 @@ const Scan = ({ navigation, route }) => {
       </View>
       <Text style={styles.maintext}>{text}</Text>
       <View style={styles.buttonContainer}>
-        {scanned && <Button title={"Scan again?"} onPress={() => setScanned(false)} color="#167e64" />}
+        {scanned && <Button title={"Scan again?"} onPress={() => {setScanned(false); setScannedBin(false); setText("")}} color="#167e64" />}
         <View style={styles.button}>
-          {scanned && <Button title={"Connect"} onPress={() => storeData(text)} color="#167e64" />}
+          {scannedBin && <Button title={"Connect"} onPress={() => storeData(text)} color="#167e64" />}
         </View>
       </View>
     </View>
