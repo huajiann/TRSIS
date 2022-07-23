@@ -48,8 +48,9 @@ const Login = ({ navigation }) => {
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
 
-  const storeData = async (value, value1, points) => {
+  const storeData = async (user, value, value1, points) => {
     try {
+      await AsyncStorage.setItem("id", user);
       await AsyncStorage.setItem("name", value);
       await AsyncStorage.setItem("email", value1);
       await AsyncStorage.setItem("points", points);
@@ -74,12 +75,8 @@ const Login = ({ navigation }) => {
           handleMessage(message, status);
         } else {
           let p = data[0].points.toString();
-          storeData(data[0].name, data[0].email, p);
-          {
-            console.log(data[0].name);
-            console.log(data[0].email);
-            console.log(data[0].points);
-          }
+          console.log(data[0]._id);
+          storeData(data[0]._id, data[0].name, data[0].email, p);
           // navigation.navigate("Home", { ...data[0] });
         }
         setSubmitting(false);

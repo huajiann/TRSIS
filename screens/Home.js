@@ -9,19 +9,22 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PageTitle, SubTitle, InnerContainer } from "./../components/style";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import axios from "axios";
 const Stack = createStackNavigator();
 const Home = ({ navigation, route }) => {
   const [binID, setbinID] = useState();
   const [status, setStatus] = useState();
 
   const [username, setUsername] = useState();
+  const [id, setId] = useState();
 
   const getUserData = async () => {
     try {
-      const value = await AsyncStorage.getItem("name");
-      if (value !== null) {
+      const userID = await AsyncStorage.getItem("id");
+      if (userID !== null) {
         // value previously stored
-        setUsername(value);
+        setId(userID);
+        handleUserData(userID);
         const value2 = await AsyncStorage.getItem("BinID");
         if (value2 !== null) {
           // value previously stored
@@ -36,6 +39,21 @@ const Home = ({ navigation, route }) => {
       // error reading value
     }
   };
+
+  const handleUserData = (userID) =>{
+    const url = "https://blooming-brushlands-85049.herokuapp.com/user/user/" + userID;
+    
+    try {
+      axios
+        .get(url)
+        .then(async (response) => {
+          const name = response.data.name;
+          setUsername(name);
+        })
+    } catch (e){
+      console.log("Error : " + e);
+    }
+  }
 
   const getData = async () => {
     try {
