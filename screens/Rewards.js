@@ -98,7 +98,7 @@ const Rewards = ({ navigation }) => {
           const points = response.data.points;
           const email = response.data.email;
           setUsername(name);
-          setPoints(points);
+          setPoints(points.toString());
           setEmail(email);
         })
     } catch (e){
