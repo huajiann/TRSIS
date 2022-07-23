@@ -16,14 +16,12 @@ const Home = ({ navigation, route }) => {
   const [status, setStatus] = useState();
 
   const [username, setUsername] = useState();
-  const [id, setId] = useState();
 
   const getUserData = async () => {
     try {
       const userID = await AsyncStorage.getItem("id");
       if (userID !== null) {
         // value previously stored
-        setId(userID);
         handleUserData(userID);
         const value2 = await AsyncStorage.getItem("BinID");
         if (value2 !== null) {
