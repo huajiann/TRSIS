@@ -29,6 +29,7 @@
     "formik": "^2.2.9",
     "joi": "^17.4.2",
     "jpeg-js": "^0.4.3",
+<<<<<<< HEAD
     "puppeteer": "^13.7.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -36,6 +37,14 @@
     "react-native-elements": "^3.4.2",
     "react-native-fs": "^2.18.0",
     "react-native-gesture-handler": "~2.2.1",
+=======
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-elements": "^3.4.2",
+    "react-native-fs": "^2.18.0",
+    "react-native-gesture-handler": "^1.10.3",
+>>>>>>> d5828d09ac4d37904b81973ae9f7db65d89811fb
     "react-native-leaderboard": "^1.0.6",
     "react-native-paper": "^4.9.2",
     "react-native-parallax-header": "^1.1.4",
