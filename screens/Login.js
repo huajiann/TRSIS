@@ -61,6 +61,16 @@ const Login = ({ navigation }) => {
     }
   };
 
+  const storeUserData = async (data) => {
+    try {
+      const jsonData = JSON.stringify(data);
+      await AsyncStorage.setItem("userData", jsonData);
+      //navigation.navigate("Home");
+    }catch (e){
+      console.log(e);
+    }
+  }
+
   const handleLogin = (credentials, setSubmitting) => {
     handleMessage(null);
     const url = "https://blooming-brushlands-85049.herokuapp.com/user/signin";
@@ -74,8 +84,14 @@ const Login = ({ navigation }) => {
         if (status !== "SUCCESS") {
           handleMessage(message, status);
         } else {
-          let p = data[0].points.toString();
-          console.log(data[0]._id);
+          const userDetails = {
+            user: data[0].name, 
+            email: data[0].email,
+            points: data[0].points.toString(),
+            items: data[0].recycledItems.toString(),
+          };
+          let p = data[0].toString();
+          storeUserData(userDetails);
           storeData(data[0]._id, data[0].name, data[0].email, p);
           // navigation.navigate("Home", { ...data[0] });
         }

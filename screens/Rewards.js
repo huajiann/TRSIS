@@ -68,8 +68,11 @@ const Rewards = ({ navigation }) => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [points, setPoints] = useState();
+  const [userId, setUserId] = useState();
+
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
+
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
   const [loading, setLoading] = useState(false);
@@ -87,8 +90,8 @@ const Rewards = ({ navigation }) => {
     }
   };
 
-  const handleUserData = (userID) =>{
-    const url = "https://blooming-brushlands-85049.herokuapp.com/user/user/" + userID;
+  const handleUserData = (user) =>{
+    const url = "https://blooming-brushlands-85049.herokuapp.com/user/user/" + user;
     
     try {
       axios

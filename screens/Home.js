@@ -15,14 +15,19 @@ const Home = ({ navigation, route }) => {
   const [binID, setbinID] = useState();
   const [status, setStatus] = useState();
 
+  const [user, setUser] = useState();
   const [username, setUsername] = useState();
 
   const getUserData = async () => {
     try {
       const userID = await AsyncStorage.getItem("id");
+      const jsonData = await AsyncStorage.getItem("userData");
+
       if (userID !== null) {
         // value previously stored
-        handleUserData(userID);
+        //handleUserData(userID);
+        const data = JSON.parse(jsonData);
+        setUsername(data.user);
         const value2 = await AsyncStorage.getItem("BinID");
         if (value2 !== null) {
           // value previously stored
@@ -37,21 +42,6 @@ const Home = ({ navigation, route }) => {
       // error reading value
     }
   };
-
-  const handleUserData = (userID) =>{
-    const url = "https://blooming-brushlands-85049.herokuapp.com/user/user/" + userID;
-    
-    try {
-      axios
-        .get(url)
-        .then(async (response) => {
-          const name = response.data.name;
-          setUsername(name);
-        })
-    } catch (e){
-      console.log("Error : " + e);
-    }
-  }
 
   const getData = async () => {
     try {
