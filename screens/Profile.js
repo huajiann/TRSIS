@@ -5,22 +5,44 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { ScrollView } from "react-native-gesture-handler";
+import axios from "axios";
 
 const Profile = ({ navigation, route }) => {
   const [username, setUsername] = useState();
-  const [useremail, setUseremail] = useState();
+  const [useremail, setEmail] = useState();
+  const [points, setPoints] = useState();
+  const [items, setItems] = useState();
 
   const getUserData = async () => {
     try {
+      const userID = await AsyncStorage.getItem("id");
       const value = await AsyncStorage.getItem("name");
       const value1 = await AsyncStorage.getItem("email");
-      if (value !== null && value1 !== null) {
+      if (userID !== null) {
         // value previously stored
-        setUsername(value);
-        setUseremail(value1);
+        handleUserData(userID);
       }
     } catch (e) {
       // error reading value
+    }
+  };
+
+  const handleUserData = (userID) => {
+    const url = "https://blooming-brushlands-85049.herokuapp.com/user/user/" + userID;
+
+    try {
+      axios.get(url).then(async (response) => {
+        const name = response.data.name;
+        const email = response.data.email;
+        const points = response.data.points;
+        const recycled = response.data.recycledItems;
+        setUsername(name);
+        setPoints(points.toString());
+        setEmail(email);
+        setItems(recycled.toString());
+      });
+    } catch (e) {
+      console.log("Error : " + e);
     }
   };
 
@@ -83,11 +105,11 @@ const Profile = ({ navigation, route }) => {
                 },
               ]}
             >
-              <Title>420</Title>
-              <Caption>Total Points Earned</Caption>
+              <Title>{points || "-"}</Title>
+              <Caption>Points Earned</Caption>
             </View>
             <View style={styles.infoBox}>
-              <Title>69</Title>
+              <Title>{items || "-"}</Title>
               <Caption>Trash Recycled</Caption>
             </View>
           </View>

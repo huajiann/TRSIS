@@ -48,8 +48,9 @@ const Login = ({ navigation }) => {
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
 
-  const storeData = async (value, value1, points) => {
+  const storeData = async (user, value, value1, points) => {
     try {
+      await AsyncStorage.setItem("id", user);
       await AsyncStorage.setItem("name", value);
       await AsyncStorage.setItem("email", value1);
       await AsyncStorage.setItem("points", points);
@@ -59,6 +60,16 @@ const Login = ({ navigation }) => {
       console.log(e);
     }
   };
+
+  const storeUserData = async (data) => {
+    try {
+      const jsonData = JSON.stringify(data);
+      await AsyncStorage.setItem("userData", jsonData);
+      //navigation.navigate("Home");
+    }catch (e){
+      console.log(e);
+    }
+  }
 
   const handleLogin = (credentials, setSubmitting) => {
     handleMessage(null);
@@ -73,13 +84,15 @@ const Login = ({ navigation }) => {
         if (status !== "SUCCESS") {
           handleMessage(message, status);
         } else {
-          let p = data[0].points.toString();
-          storeData(data[0].name, data[0].email, p);
-          {
-            console.log(data[0].name);
-            console.log(data[0].email);
-            console.log(data[0].points);
-          }
+          const userDetails = {
+            user: data[0].name, 
+            email: data[0].email,
+            points: data[0].points.toString(),
+            items: data[0].recycledItems.toString(),
+          };
+          let p = data[0].toString();
+          storeUserData(userDetails);
+          storeData(data[0]._id, data[0].name, data[0].email, p);
           // navigation.navigate("Home", { ...data[0] });
         }
         setSubmitting(false);

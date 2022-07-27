@@ -9,19 +9,25 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PageTitle, SubTitle, InnerContainer } from "./../components/style";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import axios from "axios";
 const Stack = createStackNavigator();
 const Home = ({ navigation, route }) => {
   const [binID, setbinID] = useState();
   const [status, setStatus] = useState();
 
+  const [user, setUser] = useState();
   const [username, setUsername] = useState();
 
   const getUserData = async () => {
     try {
-      const value = await AsyncStorage.getItem("name");
-      if (value !== null) {
+      const userID = await AsyncStorage.getItem("id");
+      const jsonData = await AsyncStorage.getItem("userData");
+
+      if (userID !== null) {
         // value previously stored
-        setUsername(value);
+        //handleUserData(userID);
+        const data = JSON.parse(jsonData);
+        setUsername(data.user);
         const value2 = await AsyncStorage.getItem("BinID");
         if (value2 !== null) {
           // value previously stored

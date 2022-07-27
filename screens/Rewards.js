@@ -68,8 +68,11 @@ const Rewards = ({ navigation }) => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [points, setPoints] = useState();
+  const [userId, setUserId] = useState();
+
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
+
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
   const [loading, setLoading] = useState(false);
@@ -77,19 +80,34 @@ const Rewards = ({ navigation }) => {
 
   const getUserData = async () => {
     try {
-      const value = await AsyncStorage.getItem("name");
-      const email = await AsyncStorage.getItem("email");
-      const point = await AsyncStorage.getItem("points");
-      if (value !== null) {
+      const userID = await AsyncStorage.getItem("id");
+      if (userID !== null) {
         // value previously stored
-        setUsername(value);
-        setPoints(point);
-        setEmail(email);
+        handleUserData(userID);
       }
     } catch (e) {
       // error reading value
     }
   };
+
+  const handleUserData = (user) =>{
+    const url = "https://blooming-brushlands-85049.herokuapp.com/user/user/" + user;
+    
+    try {
+      axios
+        .get(url)
+        .then(async (response) => {
+          const name = response.data.name;
+          const points = response.data.points;
+          const email = response.data.email;
+          setUsername(name);
+          setPoints(points.toString());
+          setEmail(email);
+        })
+    } catch (e){
+      console.log("Error : " + e);
+    }
+  }
 
   const combined = (value) => {
     setLoading(true);
