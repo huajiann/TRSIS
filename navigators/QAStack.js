@@ -15,7 +15,7 @@ import Signup from "./../screens/Signup";
 // import Scan from "../screens/Scan";
 // import Profile from "../screens/Profile";
 import Tabs from "../components/Tabs";
-import Home from "../screens/Home";
+import FirstNews from "./WebScrapeNews/FirstNews";
 
 const LeaderboardStack = createStackNavigator();
 

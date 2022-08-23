@@ -8,7 +8,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 //screens
-import FirstNews from "../screens/WebScrapeNews/FirstNews";
+// import FirstNews from "./FirstNews";
 import Signup from "../screens/Signup";
 // import Home from "./../screens/Home";
 // import Rewards from "../screens/Rewards";
@@ -16,10 +16,13 @@ import Signup from "../screens/Signup";
 // import Profile from "../screens/Profile";
 import Tabs from "../components/Tabs";
 import Home from "../screens/Home";
+import FirstNews from "./WebScrapeNews/FirstNews";
 
 const NewsStk = createStackNavigator();
 
 const Stack = createStackNavigator();
+
+const FirstNewsStack = createStackNavigator();
 
 const NewsStack = () => {
   return (

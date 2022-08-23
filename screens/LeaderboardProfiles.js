@@ -1,13 +1,47 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { View, Alert, Image, Text } from "react-native";
 
 import Leaderboard from "react-native-leaderboard";
 
-export default class LeaderboardProfiles extends Component {
+// const getUserData = async () => {
+//   try {
+//     const userID = await AsyncStorage.getItem("id");
+//     if (userID !== null) {
+//       // value previously stored
+//       handleUserData(userID);
+//     }
+//   } catch (e) {
+//     // error reading value
+//   }
+// };
+
+class LeaderboardProfiles extends Component {
+  handleUserData = (user) => () => {
+    const [username, setUsername] = useState();
+    const [points, setPoints] = useState();
+    const url = "https://blooming-brushlands-85049.herokuapp.com/user/usersList";
+
+    try {
+      axios.get(url).then(async (response) => {
+        const name = response.data.name;
+        const points = response.data.points;
+        setUsername(name);
+        setPoints(points.toString());
+      });
+    } catch (e) {
+      console.log("Error : " + e);
+    }
+
+    // return <div> {username}</div>;
+  };
+
   state = {
     data: [
-      { userName: "Joe", highScore: 52 },
-      { userName: "Jenny", highScore: 120 },
+      { userName: "Lei Ting", points: 1170 },
+      { userName: "Hwan Woong", points: 826 },
+      { userName: "Ravn", points: 732 },
+      { userName: "Ming Hao", points: 50 },
+
       //...
     ], //can also be an object of objects!: data: {a:{}, b:{}}
   };
@@ -37,16 +71,20 @@ export default class LeaderboardProfiles extends Component {
   }
 
   render() {
+    // const Listt = this.handleUserData();
     // const props = {
-    //   data: this.state.data,
-    //   sortBy: "highScore",
-    //   labelBy: "userName",
+    //   data: [username, points],
+    //   sortBy: "points",
+    //   labelBy: "username",
     // };
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         {this.renderHeader()}
-        <Leaderboard data={this.state.data} sortBy="highScore" labelBy="userName" />
+        {/* <div>{username}</div> */}
+        <Leaderboard data={this.state.data} sortBy="points" labelBy="userName" />
       </View>
     );
   }
 }
+
+export default LeaderboardProfiles;

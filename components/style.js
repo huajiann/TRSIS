@@ -23,6 +23,13 @@ export const StyledContainer = styled.View`
   background-color: ${primary};
 `;
 
+export const Cont = styled.View`
+  flex: 1;
+  padding: 25px;
+  padding-top: ${StatusBarHeight + 30}px;
+  background-color: #d2edcc;
+`;
+
 export const InnerContainer = styled.View`
   flex: 1;
   width: 100%;
@@ -68,6 +75,22 @@ export const PageTitle = styled.Text`
     `
         font-size: 35px;
     `}
+`;
+export const Ti = styled.Text`
+  font-size: 30px;
+  text-align: left;
+  font-weight: bold;
+  color: ${brand};
+  padding: 10px;
+`;
+
+export const Sub = styled.Text`
+  font-size: 18px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: ${tertiary};
 `;
 
 export const SubTitle = styled.Text`
@@ -148,7 +171,7 @@ export const ButtonText = styled.Text`
   ${(props) =>
     props.google == true &&
     `
-    padding: 25px;
+    padding-horizontal: 25px;
 `}
 `;
 

@@ -18,7 +18,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // import axios from "axios";
 
 //colors
-import { Colors } from "./../components/style";
+import { Colors, Cont, InnerContainer, PageTitle, StyledContainer, SubTitle } from "./../components/style";
 import { Entypo } from "@expo/vector-icons";
 
 import {
@@ -35,6 +35,8 @@ import {
   Line,
   ButtonText,
   StyledButton,
+  Ti,
+  Sub,
 } from "./../components/style";
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
@@ -67,144 +69,167 @@ const ModalPop = ({ visible, children }) => {
 
 const News = ({ navigation }) => {
   return (
+    // <ScrollView>
+    //   <View
+    //     style={{
+    //       backgroundColor: "#A2E4B8",
+    //       height: "10%" /*original 5%*/,
+    //       justifyContent: "center",
+    //       paddingHorizontal: 45,
+    //     }}
+    //   >
+    //     <View
+    //       style={{
+    //         flexDirection: "row",
+    //         alignItems: "center",
+    //         marginTop: 40,
+    //         width: "100%",
+    //       }}
+    //     >
+    //       <View style={{ width: "40%" }}></View>
+    //       <HeaderTitle>News</HeaderTitle>
+    //     </View>
+    //   </View>
+    //   <SafeAreaView style={styles.AndroidSafeArea}>
+    //     {/*from below here it shall start duplicating :3*/}
+    //     {/* <View style={styles.menuWrapper}>
+    //       <NewsContainer onPress={() => navigation.navigate("FirstNews")}>
+    //         <NewsImage
+    //           resizeMode="cover"
+    //           source={require("./../assets/img/img2.png")}
+    //           style={{
+    //             position: "relative",
+    //             marginLeft: 0,
+    //             marginTop: 10,
+    //             borderRadius: 30,
+    //           }}
+    //         />
+    //         <NewsDetailsBox>
+    //           <NewsTitle>Understanding Recycling </NewsTitle>
+    //           <NewsDes>In now days, Malaysia is encountering ....</NewsDes>
+    //         </NewsDetailsBox>
+    //       </NewsContainer>
+    //     </View> */}
+    //     {/*below here also duplicate*/}
+    //     {/* <View style={styles.menuWrapper}>
+    //       <NewsContainer onPress={() => navigation.navigate("Home")}>
+    //         <NewsImage
+    //           resizeMode="cover"
+    //           source={require("./../assets/img/img2.png")}
+    //           style={{
+    //             position: "relative",
+    //             marginLeft: 0,
+    //             marginTop: 10,
+    //             borderRadius: 30,
+    //           }}
+    //         />
+    //         <NewsDetailsBox>
+    //           <NewsTitle>Understanding Recycling </NewsTitle>
+    //           <NewsDes>In now days, Malaysia is encountering ....</NewsDes>
+    //         </NewsDetailsBox>
+    //       </NewsContainer>
+    //     </View> */}
+    //     {/*another duplicates aih*/}
+    //     {/* <View style={styles.menuWrapper}>
+    //       <NewsContainer onPress={() => navigation.navigate("Home")}>
+    //         <NewsImage
+    //           resizeMode="cover"
+    //           source={require("./../assets/img/img2.png")}
+    //           style={{
+    //             position: "relative",
+    //             marginLeft: 0,
+    //             marginTop: 10,
+    //             borderRadius: 30,
+    //           }}
+    //         />
+    //         <NewsDetailsBox>
+    //           <NewsTitle>Understanding Recycling </NewsTitle>
+    //           <NewsDes>In now days, Malaysia is encountering ....</NewsDes>
+    //         </NewsDetailsBox>
+    //       </NewsContainer>
+    //     </View> */}
+    //     {/* <View style={styles.menuWrapper}>
+    //       <NewsContainer onPress={() => navigation.navigate("Home")}>
+    //         <NewsImage
+    //           resizeMode="cover"
+    //           source={require("./../assets/img/img2.png")}
+    //           style={{
+    //             position: "relative",
+    //             marginLeft: 0,
+    //             marginTop: 10,
+    //             borderRadius: 30,
+    //           }}
+    //         />
+    //         <NewsDetailsBox>
+    //           <NewsTitle>Understanding Recycling </NewsTitle>
+    //           <NewsDes>In now days, Malaysia is encountering ....</NewsDes>
+    //         </NewsDetailsBox>
+    //       </NewsContainer>
+    //     </View> */}
+    //     {/*below here also duplicate*/}
+    //     {/* <View style={styles.menuWrapper}>
+    //       <NewsContainer onPress={() => navigation.navigate("Home")}>
+    //         <NewsImage
+    //           resizeMode="cover"
+    //           source={require("./../assets/img/img2.png")}
+    //           style={{
+    //             position: "relative",
+    //             marginLeft: 0,
+    //             marginTop: 10,
+    //             borderRadius: 30,
+    //           }}
+    //         />
+    //         <NewsDetailsBox>
+    //           <NewsTitle>Understanding Recycling </NewsTitle>
+    //           <NewsDes>In now days, Malaysia is encountering ....</NewsDes>
+    //         </NewsDetailsBox>
+    //       </NewsContainer>
+    //     </View> */}
+    //     {/*another duplicates aih*/}
+    //     {/* <View style={styles.menuWrapper}>
+    //       <NewsContainer onPress={() => navigation.navigate("Home")}>
+    //         <NewsImage
+    //           resizeMode="cover"
+    //           source={require("./../assets/img/img2.png")}
+    //           style={{
+    //             position: "relative",
+    //             marginLeft: 0,
+    //             marginTop: 10,
+    //             borderRadius: 30,
+    //           }}
+    //         />
+    //         <NewsDetailsBox>
+    //           <NewsTitle>Understanding Recycling </NewsTitle>
+    //           <NewsDes>In now days, Malaysia is encountering ....</NewsDes>
+    //         </NewsDetailsBox>
+    //       </NewsContainer>
+    //     </View> */}
+    //     {/*ok duplicate ends here HAHAH*/}
+    //     {/* </View> */}
+    //   </SafeAreaView>
+    // </ScrollView>
     <ScrollView>
-      <View
-        style={{
-          backgroundColor: "#A2E4B8",
-          height: "5%",
-          justifyContent: "center",
-          paddingHorizontal: 45,
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginTop: 25,
-            width: "100%",
-          }}
-        >
-          <View style={{ width: "40%" }}></View>
-          <HeaderTitle>News</HeaderTitle>
-        </View>
-      </View>
-      <SafeAreaView style={styles.AndroidSafeArea}>
-        {/*from below here it shall start duplicating :3*/}
-        <View style={styles.menuWrapper}>
-          <NewsContainer onPress={() => navigation.navigate("FirstNews")}>
-            <NewsImage
-              resizeMode="cover"
-              source={require("./../assets/img/img2.png")}
-              style={{
-                position: "relative",
-                marginLeft: 0,
-                marginTop: 10,
-                borderRadius: 30,
-              }}
-            />
-            <NewsDetailsBox>
-              <NewsTitle>Understanding Recycling </NewsTitle>
-              <NewsDes>In now days, Malaysia is encountering ....</NewsDes>
-            </NewsDetailsBox>
-          </NewsContainer>
-        </View>
-        {/*below here also duplicate*/}
-        <View style={styles.menuWrapper}>
-          <NewsContainer onPress={() => navigation.navigate("Home")}>
-            <NewsImage
-              resizeMode="cover"
-              source={require("./../assets/img/img2.png")}
-              style={{
-                position: "relative",
-                marginLeft: 0,
-                marginTop: 10,
-                borderRadius: 30,
-              }}
-            />
-            <NewsDetailsBox>
-              <NewsTitle>Understanding Recycling </NewsTitle>
-              <NewsDes>In now days, Malaysia is encountering ....</NewsDes>
-            </NewsDetailsBox>
-          </NewsContainer>
-        </View>
-        {/*another duplicates aih*/}
-        <View style={styles.menuWrapper}>
-          <NewsContainer onPress={() => navigation.navigate("Home")}>
-            <NewsImage
-              resizeMode="cover"
-              source={require("./../assets/img/img2.png")}
-              style={{
-                position: "relative",
-                marginLeft: 0,
-                marginTop: 10,
-                borderRadius: 30,
-              }}
-            />
-            <NewsDetailsBox>
-              <NewsTitle>Understanding Recycling </NewsTitle>
-              <NewsDes>In now days, Malaysia is encountering ....</NewsDes>
-            </NewsDetailsBox>
-          </NewsContainer>
-        </View>
-        <View style={styles.menuWrapper}>
-          <NewsContainer onPress={() => navigation.navigate("Home")}>
-            <NewsImage
-              resizeMode="cover"
-              source={require("./../assets/img/img2.png")}
-              style={{
-                position: "relative",
-                marginLeft: 0,
-                marginTop: 10,
-                borderRadius: 30,
-              }}
-            />
-            <NewsDetailsBox>
-              <NewsTitle>Understanding Recycling </NewsTitle>
-              <NewsDes>In now days, Malaysia is encountering ....</NewsDes>
-            </NewsDetailsBox>
-          </NewsContainer>
-        </View>
-        {/*below here also duplicate*/}
-        <View style={styles.menuWrapper}>
-          <NewsContainer onPress={() => navigation.navigate("Home")}>
-            <NewsImage
-              resizeMode="cover"
-              source={require("./../assets/img/img2.png")}
-              style={{
-                position: "relative",
-                marginLeft: 0,
-                marginTop: 10,
-                borderRadius: 30,
-              }}
-            />
-            <NewsDetailsBox>
-              <NewsTitle>Understanding Recycling </NewsTitle>
-              <NewsDes>In now days, Malaysia is encountering ....</NewsDes>
-            </NewsDetailsBox>
-          </NewsContainer>
-        </View>
-        {/*another duplicates aih*/}
-        <View style={styles.menuWrapper}>
-          <NewsContainer onPress={() => navigation.navigate("Home")}>
-            <NewsImage
-              resizeMode="cover"
-              source={require("./../assets/img/img2.png")}
-              style={{
-                position: "relative",
-                marginLeft: 0,
-                marginTop: 10,
-                borderRadius: 30,
-              }}
-            />
-            <NewsDetailsBox>
-              <NewsTitle>Understanding Recycling </NewsTitle>
-              <NewsDes>In now days, Malaysia is encountering ....</NewsDes>
-            </NewsDetailsBox>
-          </NewsContainer>
-        </View>
-        {/*ok duplicate ends here HAHAH*/}
-        {/* </View> */}
-      </SafeAreaView>
+      <Cont>
+        <StatusBar style="light" />
+        {/* <InnerContainer> */}
+        {/* <PageLogo resizeMode="cover" source={require("./../assets/img/img1.jpg")} /> */}
+        <Ti>Understand Recycle Bin Colours in Malaysia</Ti>
+        <Sub>
+          According to Waste Management Association of Malaysia, three different bins are recommended for recycling
+          purposes
+        </Sub>
+        <Sub>Blue: Paper</Sub>
+        <Sub>Brown: Glass</Sub>
+        <Sub>Orange: Plastics & Aluminium</Sub>
+        <Text> </Text>
+        <Ti>What is Residual Waste ?</Ti>
+        <Sub>
+          Defined as non- hazardous waste material that cannot be re-used or recycled. Waste that needs to be disposed
+          off either in a landfill or through incinerator . Eg. diapers, sanitary pads.
+        </Sub>
+
+        {/* </InnerContainer> */}
+      </Cont>
     </ScrollView>
   );
 };

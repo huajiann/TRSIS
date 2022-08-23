@@ -12,7 +12,7 @@ const Scan = ({ navigation, route }) => {
   const [scannedBin, setScannedBin] = useState(false);
   const [scanPoints, setScanPoints] = useState(false);
 
-  const [points, setPoints] = useState(); 
+  const [points, setPoints] = useState();
   const [text, setText] = useState("Not yet scanned!");
 
   const [message, setMessage] = useState();
@@ -31,27 +31,26 @@ const Scan = ({ navigation, route }) => {
 
   // What happened when we scan the qrcode
   const handleBarCodeScanned = ({ type, data }) => {
-
     //setText(data);
     const data_obj = JSON.parse(data);
     //console.log("Type : " + type + "\nData : " + data_obj);
     const data_id = data_obj.id;
-    const check_id = data_id.slice(0,5);
+    const check_id = data_id.slice(0, 5);
 
-    if(check_id == "TRSIS") {
+    if (check_id == "TRSIS") {
       setScanned(true);
       setScannedBin(true);
       setText("TRSIS Bin found : " + data_id);
-    } else if(check_id == "POINT"){
+    } else if (check_id == "POINT") {
       setScanned(true);
       //setScanPoints(true);
-      confirmPoints(data_obj.points)
+      confirmPoints(data_obj.points);
       setPoints(data_obj.points);
 
       setText("Points : " + data_obj.points + "pts");
     } else {
       setScanned(true);
-      setText("Error, Please scan again.")
+      setText("Error, Please scan again.");
     }
   };
 
@@ -77,22 +76,22 @@ const Scan = ({ navigation, route }) => {
   const confirmPoints = (points) => {
     Alert.alert(
       "Thank you for recycling!",
-      `You have ${points} points to be collected! Click "Confirm" to add into your account.` ,
+      `You have ${points} points to be collected! Click "Confirm" to add into your account.`,
       [
         {
           text: "Cancel",
           onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
+          style: "cancel",
         },
-        { text: "Confirm", onPress: () => addPoints(points) }
-      ]
-    )
-  }
+        { text: "Confirm", onPress: () => addPoints(points) },
+      ],
+    );
+  };
 
   const addPoints = async (newPoints) => {
     try {
       const userData = await AsyncStorage.getItem("userData");
-      if(userData !== null){
+      if (userData !== null) {
         const data = JSON.parse(userData);
         const currentPoints = parseInt(data.points);
         const updatingPoints = currentPoints + parseInt(newPoints);
@@ -134,7 +133,6 @@ const Scan = ({ navigation, route }) => {
     }
   };
 
-
   const storeData = async (value) => {
     try {
       await AsyncStorage.setItem("BinID", value);
@@ -160,7 +158,18 @@ const Scan = ({ navigation, route }) => {
           style={StyleSheet.absoluteFillObject}
         />
         <View style={styles.buttonContainer}>
-          {scanned && <Button title={"Scan again?"} onPress={() => {setScanned(false); setScannedBin(false); setScanPoints(false); setText("")}} color="#167e64" />}
+          {scanned && (
+            <Button
+              title={"Scan again?"}
+              onPress={() => {
+                setScanned(false);
+                setScannedBin(false);
+                setScanPoints(false);
+                setText("");
+              }}
+              color="#167e64"
+            />
+          )}
           <View style={styles.button}>
             {scannedBin && <Button title={"Connect"} onPress={() => storeData(text)} color="#167e64" />}
           </View>
@@ -196,7 +205,7 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   buttonContainer: {
-    width: "40%",
+    width: "20%",
     alignSelf: "center",
   },
   button: {

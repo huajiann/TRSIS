@@ -106,7 +106,7 @@ const Profile = ({ navigation, route }) => {
               ]}
             >
               <Title>{points || "-"}</Title>
-              <Caption>Points Earned</Caption>
+              <Caption>Current Points</Caption>
             </View>
             <View style={styles.infoBox}>
               <Title>{items || "-"}</Title>
