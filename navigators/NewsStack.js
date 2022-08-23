@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Colors, LeftIcon, RightIcon } from "./../components/style";
+import { Colors, LeftIcon, RightIcon } from "../components/style";
 const { primary, tertiary, secondary } = Colors;
 
 //react navigation
@@ -8,20 +8,23 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 //screens
-import LeaderboardProfiles from "./../screens/LeaderboardProfiles";
-import Signup from "./../screens/Signup";
+// import FirstNews from "./FirstNews";
+import Signup from "../screens/Signup";
 // import Home from "./../screens/Home";
 // import Rewards from "../screens/Rewards";
 // import Scan from "../screens/Scan";
 // import Profile from "../screens/Profile";
 import Tabs from "../components/Tabs";
+import Home from "../screens/Home";
 import FirstNews from "./WebScrapeNews/FirstNews";
 
-const LeaderboardStack = createStackNavigator();
+const NewsStk = createStackNavigator();
 
 const Stack = createStackNavigator();
 
-const QAStack = () => {
+const FirstNewsStack = createStackNavigator();
+
+const NewsStack = () => {
   return (
     // <NavigationContainer>
     <Stack.Navigator
@@ -38,23 +41,19 @@ const QAStack = () => {
           paddingLeft: 20,
         },
       }}
-      initialRouteName="LeaderboardProfiles"
+      initialRouteName="FirstNews"
     >
-      <Stack.Screen
-        name="LeaderboardProfiles"
-        component={LeaderboardProfiles}
-        options={{ headerShown: false, headerTitle: false }}
-      />
-      <Stack.Screen name="Home" component={Tabs} options={{ headerShown: false, headerTitle: false }} />
+      <Stack.Screen name="FirstNews" component={FirstNews} options={{ headerShown: false, headerTitle: false }} />
+      <Stack.Screen name="News" component={Tabs} options={{ headerShown: false, headerTitle: false }} />
     </Stack.Navigator>
     // </NavigationContainer>
   );
 };
 
-export default QAStack;
+export default NewsStack;
 
-const LeaderboardStackScreen = ({ navigation, route }) => (
-  <LeaderboardStack.Navigator
+const NewsStackScreen = ({ navigation, route }) => (
+  <NewsStack.Navigator
     screenOptions={{
       headerStyle: {
         backgroundColor: "#A2E4B8",
@@ -66,13 +65,13 @@ const LeaderboardStackScreen = ({ navigation, route }) => (
       headerLeft: false,
     }}
   >
-    <LeaderboardStack.Screen
-      name="LeaderboardProfiles"
-      component={LeaderboardProfiles}
+    <NewsStack.Screen
+      name="FirstNews"
+      component={FirstNews}
       // initialParams={{ userName: route.params.userName, bin: route.params.paramKey }}
       options={{
         headerShown: false,
       }}
     />
-  </LeaderboardStack.Navigator>
+  </NewsStack.Navigator>
 );

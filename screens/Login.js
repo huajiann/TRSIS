@@ -66,10 +66,10 @@ const Login = ({ navigation }) => {
       const jsonData = JSON.stringify(data);
       await AsyncStorage.setItem("userData", jsonData);
       //navigation.navigate("Home");
-    }catch (e){
+    } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   const handleLogin = (credentials, setSubmitting) => {
     handleMessage(null);
@@ -85,7 +85,7 @@ const Login = ({ navigation }) => {
           handleMessage(message, status);
         } else {
           const userDetails = {
-            user: data[0].name, 
+            user: data[0].name,
             email: data[0].email,
             points: data[0].points.toString(),
             items: data[0].recycledItems.toString(),

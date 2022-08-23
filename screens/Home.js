@@ -154,12 +154,13 @@ const Home = ({ navigation, route }) => {
                   marginTop: 15,
                   borderRadius: 15,
                   marginBottom: 10,
+                  marginRight: -20,
                   width: 100,
                   alignItems: "center",
                   justifyContent: "center",
                 }}
               >
-                <Icon name="qr-code-outline" color="#28495c" size={50} />
+                <Icon name="podium-outline" color="#28495c" size={50} />
                 <View
                   style={{
                     flexDirection: "row",
@@ -169,7 +170,7 @@ const Home = ({ navigation, route }) => {
                 >
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: 14,
                       fontWeight: "normal",
                     }}
                   >
@@ -203,7 +204,7 @@ const Home = ({ navigation, route }) => {
                 >
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: 14,
                       fontWeight: "normal",
                     }}
                   >
@@ -221,6 +222,7 @@ const Home = ({ navigation, route }) => {
                   marginTop: 15,
                   borderRadius: 15,
                   marginBottom: 10,
+                  marginLeft: 5,
                   width: 100,
                   alignItems: "center",
                   justifyContent: "center",
@@ -236,7 +238,7 @@ const Home = ({ navigation, route }) => {
                 >
                   <Text
                     style={{
-                      fontSize: 15,
+                      fontSize: 14,
                       fontWeight: "normal",
                     }}
                   >

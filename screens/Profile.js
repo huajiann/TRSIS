@@ -27,26 +27,24 @@ const Profile = ({ navigation, route }) => {
     }
   };
 
-  const handleUserData = (userID) =>{
+  const handleUserData = (userID) => {
     const url = "https://blooming-brushlands-85049.herokuapp.com/user/user/" + userID;
-    
+
     try {
-      axios
-        .get(url)
-        .then(async (response) => {
-          const name = response.data.name;
-          const email = response.data.email;
-          const points = response.data.points;
-          const recycled = response.data.recycledItems;
-          setUsername(name);
-          setPoints(points.toString());
-          setEmail(email);
-          setItems(recycled.toString());
-        })
-    } catch (e){
+      axios.get(url).then(async (response) => {
+        const name = response.data.name;
+        const email = response.data.email;
+        const points = response.data.points;
+        const recycled = response.data.recycledItems;
+        setUsername(name);
+        setPoints(points.toString());
+        setEmail(email);
+        setItems(recycled.toString());
+      });
+    } catch (e) {
       console.log("Error : " + e);
     }
-  }
+  };
 
   useEffect(() => {
     getUserData();
@@ -107,11 +105,11 @@ const Profile = ({ navigation, route }) => {
                 },
               ]}
             >
-              <Title>{ points || "-" }</Title>
-              <Caption>Points Earned</Caption>
+              <Title>{points || "-"}</Title>
+              <Caption>Current Points</Caption>
             </View>
             <View style={styles.infoBox}>
-              <Title>{ items || "-" }</Title>
+              <Title>{items || "-"}</Title>
               <Caption>Trash Recycled</Caption>
             </View>
           </View>
